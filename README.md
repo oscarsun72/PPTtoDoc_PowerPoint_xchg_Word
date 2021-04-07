@@ -1,4 +1,4 @@
-# PPTtoDoc_PowerPoint_XCHG_Word_DocswithcPPT
+# PPTtoDoc_PowerPoint_XCHG_Word_DocSwitchPPT
  pptx and docx switch .ppt and doc, PowerPoint and Word automation exchange and interoperation
  
 【本計畫之緣起】：
