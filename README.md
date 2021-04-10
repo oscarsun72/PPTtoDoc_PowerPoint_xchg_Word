@@ -24,6 +24,8 @@
 * 完整電腦名稱：pub8_1325.pccuad.pccu.edu.tw
 * 網域：pccuad.pccu.edu.tw
 * Office 2013
+
+
 至於教職員個人雲則不到一天就跑完了「華康行書體」13,727字，規格如下：
 * 
 * 
