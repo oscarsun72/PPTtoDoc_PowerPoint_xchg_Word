@@ -148,7 +148,9 @@ namespace Doc_PPt
                     //tb.Cell(1, 1).SetWidth(Selection.Document.Tables[r].PreferredWidth -
                     //  tb.Cell(1, 2).Width, WinWord.WdRulerStyle.wdAdjustNone);
                     //表格置中
-                    //tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
+                    //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
+                    //這才有效：
+                    tb.Rows.Alignment=WinWord.WdRowAlignment.wdAlignRowCenter;
                     inlsp.Select(); Selection.Cut();//剪下圖片貼入表格
                     tb.Cell(1, 2).Range.Characters[1].Select();
                     Selection.Paste();
