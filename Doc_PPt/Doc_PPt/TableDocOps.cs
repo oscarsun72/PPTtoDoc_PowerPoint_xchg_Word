@@ -67,6 +67,8 @@ namespace Doc_PPt
             WinWord.Row rw;
             r = 1;
             rng = Selection.Range;
+            wdApp.ScreenUpdating = false;
+            d.Tables[1].Rows.Add(); d.Tables[1].Rows.Add();//最後會留下一個表格再予刪除
             while (Selection.Information[WinWord.WdInformation.wdWithInTable])
             {
                 Selection.SplitTable();
@@ -164,16 +166,14 @@ namespace Doc_PPt
                 }
                 Selection.Document.Tables[r].Columns[8].Cells.Delete();
                 r += 2;//r++; r++; //前面Tables.Add多插一表格，計數要再加1
+                if (r > d.Tables.Count) break;
                 if (Selection.Document.Tables[r].Rows.Count > 3)//結束時，尚須修改。目前可以權且加幾空白列在最後一列後
                     Selection.Document.Tables[r].Rows[3].Select();
                 else
                     break;
             }
-            //foreach (WinWord.Table tbl in d.Tables)
-            //{//無效
-            //    tbl.Select();
-            //    Selection.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
-            //}
+            d.Tables[d.Tables.Count].Delete();
+            wdApp.ScreenUpdating = true;
             SystemSounds.Beep.Play();//Beep
             //https://blog.kkbruce.net/2019/03/csharpformusicplay.html#.YHiXtqzivsQ
 
