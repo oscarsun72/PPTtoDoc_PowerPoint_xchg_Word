@@ -70,6 +70,9 @@ namespace Doc_PPt
             while (Selection.Information[WinWord.WdInformation.wdWithInTable])
             {
                 Selection.SplitTable();
+                /* 表格置中都無效
+                 * Selection.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
+                */
                 rw = Selection.Document.Tables[1].Rows[1];
                 rw.Range.Copy();
                 Selection.Document.Tables[Selection.Document.Tables.Count].Range.Characters[1].Select();
@@ -132,8 +135,8 @@ namespace Doc_PPt
                     {
                         Selection.MoveRight(WinWord.WdUnits.wdCharacter, 1, WinWord.WdMovementType.wdExtend);
                         inlsp = Selection.InlineShapes[1];
-                        inlsp.Height += 81;//181;// = Selection.InlineShapes[1].Height + 181;
-                        inlsp.Width += 81;//181;//= Selection.InlineShapes[1].Height + 181;
+                        inlsp.Height += 181;// = Selection.InlineShapes[1].Height + 181;
+                        inlsp.Width += 181;//= Selection.InlineShapes[1].Height + 181;
                     }
                     //圖片置中
                     //Selection.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
@@ -141,8 +144,7 @@ namespace Doc_PPt
                     tb = Selection.Tables.Add(Selection.Range, 1, 2);
                     tb.Borders.InsideLineStyle = WinWord.WdLineStyle.wdLineStyleSingle;
                     tb.Borders.OutsideLineStyle = WinWord.WdLineStyle.wdLineStyleDouble;
-                    tb.PreferredWidthType = WinWord.WdPreferredWidthType.wdPreferredWidthPoints;
-                    tb.PreferredWidth = (float)549.6378;//Selection.Document.Tables[r].PreferredWidth;
+                    //tb.AutoFitBehavior(WinWord.WdAutoFitBehavior.wdAutoFitFixed);
                     //tb.Cell(1, 1).SetWidth(Selection.Document.Tables[r].PreferredWidth -
                     //  tb.Cell(1, 2).Width, WinWord.WdRulerStyle.wdAdjustNone);
                     //表格置中
@@ -150,8 +152,11 @@ namespace Doc_PPt
                     inlsp.Select(); Selection.Cut();//剪下圖片貼入表格
                     tb.Cell(1, 2).Range.Characters[1].Select();
                     Selection.Paste();
-                    Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
+                    tb.PreferredWidthType = WinWord.WdPreferredWidthType.wdPreferredWidthPoints;
+                    tb.PreferredWidth = (float)549.6378;//Selection.Document.Tables[r].PreferredWidth;
+                    tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
                     Selection.MoveDown();
+                    //Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
                     //與下一分割出來的表格空2行（段）
                     Selection.InsertParagraphAfter(); Selection.InsertParagraphAfter();
                 }
