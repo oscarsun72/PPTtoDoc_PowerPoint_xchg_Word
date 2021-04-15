@@ -42,6 +42,7 @@ namespace Doc_PPt
             this.textBox1.Size = new System.Drawing.Size(501, 46);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "file:///D:\\千慮一得齋\\書信\\圖書管理\\黃沛榮老師助理\\@@@華語文工具及資料@@@\\!!特定資料!!\\＃字源圖片%20（象形）.docx";
+            this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
             // 
             // label1
             // 

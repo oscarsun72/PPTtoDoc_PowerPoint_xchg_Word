@@ -41,7 +41,7 @@ namespace Doc_PPt
                 string dFullname = "";
                 if (wdApp.ActiveDocument.Name != "＃字源圖片 （象形）.docx")
                 {
-                    TextBox textBox1 = (TextBox)Application.OpenForms[0].Controls[0];
+                    TextBox textBox1 = (TextBox)Application.OpenForms[0].Controls["textBox1"];
                     if (textBox1.Text.IndexOf("字源圖片") > 1)
                     {
                         dFullname = textBox1.Text.Replace(@"file:///", "").Replace("%20", " ");

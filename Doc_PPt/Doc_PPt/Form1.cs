@@ -21,5 +21,10 @@ namespace Doc_PPt
         {
             new TableDocOps().splitTableByEachRowTitleed字源圖片();
         }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            textBox1.Text= Clipboard.GetText();
+        }
     }
 }
