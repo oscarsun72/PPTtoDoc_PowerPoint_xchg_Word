@@ -1,0 +1,11 @@
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.exe.config
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.exe
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.pdb
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csprojAssemblyReference.cache
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.ResolveComReference.cache
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.Form1.resources
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.Properties.Resources.resources
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.GenerateResource.cache
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.CoreCompileInputs.cache
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.exe
+V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.pdb

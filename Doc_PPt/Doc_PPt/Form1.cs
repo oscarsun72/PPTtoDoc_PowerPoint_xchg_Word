@@ -16,5 +16,10 @@ namespace Doc_PPt
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new TableDocOps().splitTableByEachRowTitleed字源圖片();
+        }
     }
 }
