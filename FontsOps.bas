@@ -82,6 +82,7 @@ fontOk = Array("夹发砰", "穝灿砰", "稬硁タ堵砰", "穝灿砰 (セゅいゅ)", "+
                 "64瓜", "︽", _
                 "絝", "ヒ癌ゅ", "ゅ", "刘", "ゅ供刘B", "ゅ供刘DB", "ゅ供刘HKM", "ゅ供刘M", _
                 "地眃︽砰", "ゅ供︽发L", "DFGGyoSho-W7", "ゅ供肣窸B", "ゅ供︽发窸砰B", "ゅ供葵掸︽发M", _
+                "DFPGyoSho-W7", _
                 "FangSong", "Adobe ラШ Std R", "ゅ供ラШB", "ゅ供ラШL", _
                 "毙▅场夹非发", "Adobe 发蔨 Std R", "KaiTi", "ゅ供夹非发砰ProM", _
                 "ゅ供肅发H", "ゅ供肅发U", "ゅ供を发B", "ゅ供を发EB", "ゅ供を发H", _
@@ -91,6 +92,6 @@ fontOk = Array("夹发砰", "穝灿砰", "稬硁タ堵砰", "穝灿砰 (セゅいゅ)", "+
                 "ゅ供繨ㄨ砰B", "DFKinBun-W3", _
                 "DFGFuun-W7", _
  _
-                "地眃︽砰(P)") '地眃︽砰(P)⊿ゲ璶暗
+                "地眃︽砰(P)", "DFPFuun-W7") '地眃︽砰(P)⊿ゲ璶暗
 End Sub
 
