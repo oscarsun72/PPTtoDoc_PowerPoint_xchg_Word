@@ -4,37 +4,28 @@ using System.IO;
 using System.Media;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using WinWord = Microsoft.Office.Interop.Word;
+using winWord = Microsoft.Office.Interop.Word;
 namespace Doc_PPt
 {
     class TableDocOps
     {
-        readonly WinWord.Application wdApp;
+        readonly winWord.Application wdApp; winWord.Document d; const string docName = "＃字源圖片 （象形）.docx";
         public TableDocOps()
         {
-            try
-            {
-                wdApp = (WinWord.Application)Marshal.GetActiveObject("Word.Application");
-            }
-            catch (Exception)
-            {
-                wdApp = new WinWord.Application();
-                //throw;
-            }
 
+            wdApp = docApp.getDocApp();
 
         }
 
 
         internal void splitTableByEachRowTitleed字源圖片()
-        {
-            WinWord.Document d; const string docName = "＃字源圖片 （象形）.docx"; string dFullname = "";
+        {            
             if (wdApp.Documents.Count > 0)
             {
                 d = wdApp.ActiveDocument;
                 if (d.Name != docName)
                 {
-                    foreach (WinWord.Document item in wdApp.Documents)
+                    foreach (winWord.Document item in wdApp.Documents)
                     {
                         if (item.Name == docName)
                         {
@@ -44,32 +35,24 @@ namespace Doc_PPt
                 }
 
                 if (d.Name != docName)
-                {
-                    dFullname = getDocFullname();
-                }
-                if (dFullname == "" || !File.Exists(dFullname))
-                {
-                    MessageBox.Show("請在textBox1文字方塊輸入「字源圖片」的「正確的」全檔名"); return;
-                }
-                d = wdApp.Documents.Open(dFullname);
+                    d=DocOps.openDoc(DocOps.getDocFullname());
             }
             else
             {
-                dFullname = getDocFullname();
-                d = wdApp.Documents.Open(dFullname);
+                d= DocOps.openDoc(DocOps.getDocFullname());
             }
             d.Tables[1].Cell(3, 1).Range.Characters[1].Select();
-            WinWord.Selection Selection = d.ActiveWindow.Selection;
-            Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseStart);
-            int r, s, s1; WinWord.Cell cel; WinWord.Range rng;
-            WinWord.InlineShape inlsp; WinWord.Table tb;
+            winWord.Selection Selection = d.ActiveWindow.Selection;
+            Selection.Collapse(winWord.WdCollapseDirection.wdCollapseStart);
+            int r, s, s1; winWord.Cell cel; winWord.Range rng;
+            winWord.InlineShape inlsp; winWord.Table tb;
             //List<WinWord.InlineShape> inlsps = new List<WinWord.InlineShape>();
-            WinWord.Row rw;
+            winWord.Row rw;
             r = 1;
             rng = Selection.Range;
             wdApp.ScreenUpdating = false;
             d.Tables[1].Rows.Add(); d.Tables[1].Rows.Add();//最後會留下一個表格再予刪除
-            while (Selection.Information[WinWord.WdInformation.wdWithInTable])
+            while (Selection.Information[winWord.WdInformation.wdWithInTable])
             {
                 Selection.SplitTable();
                 /* 表格置中都無效
@@ -78,10 +61,10 @@ namespace Doc_PPt
                 rw = Selection.Document.Tables[1].Rows[1];
                 rw.Range.Copy();
                 Selection.Document.Tables[Selection.Document.Tables.Count].Range.Characters[1].Select();
-                Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseStart);
+                Selection.Collapse(winWord.WdCollapseDirection.wdCollapseStart);
                 Selection.Paste();
                 Selection.Document.Tables[Selection.Document.Tables.Count].Range.Characters[1].Select();
-                Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseStart);
+                Selection.Collapse(winWord.WdCollapseDirection.wdCollapseStart);
                 Selection.MoveLeft();
                 if (Selection.Document.Tables[r].Rows.Count == 1)
                     cel = Selection.Document.Tables[r].Cell(1, 8);
@@ -102,7 +85,7 @@ namespace Doc_PPt
                     s1 = Selection.Start;
                     if (s1 > s)
                     {
-                        while (rng.Information[WinWord.WdInformation.wdWithInTable])
+                        while (rng.Information[winWord.WdInformation.wdWithInTable])
                         {
                             s1--;
                             rng.SetRange(s1, s1);
@@ -110,7 +93,7 @@ namespace Doc_PPt
                     }
                     else if (s1 < s)
                     {
-                        while (rng.Information[WinWord.WdInformation.wdWithInTable])
+                        while (rng.Information[winWord.WdInformation.wdWithInTable])
                         {
                             s1++;
                             rng.SetRange(s1, s1);
@@ -135,7 +118,7 @@ namespace Doc_PPt
                     }//調整圖片大小
                     else
                     {
-                        Selection.MoveRight(WinWord.WdUnits.wdCharacter, 1, WinWord.WdMovementType.wdExtend);
+                        Selection.MoveRight(winWord.WdUnits.wdCharacter, 1, winWord.WdMovementType.wdExtend);
                         inlsp = Selection.InlineShapes[1];
                         inlsp.Height += 181;// = Selection.InlineShapes[1].Height + 181;
                         inlsp.Width += 181;//= Selection.InlineShapes[1].Height + 181;
@@ -144,18 +127,18 @@ namespace Doc_PPt
                     //Selection.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
                     //插入表格，將圖片置入
                     tb = Selection.Tables.Add(Selection.Range, 1, 2);
-                    tb.Borders.InsideLineStyle = WinWord.WdLineStyle.wdLineStyleSingle;
-                    tb.Borders.OutsideLineStyle = WinWord.WdLineStyle.wdLineStyleDouble;
+                    tb.Borders.InsideLineStyle = winWord.WdLineStyle.wdLineStyleSingle;
+                    tb.Borders.OutsideLineStyle = winWord.WdLineStyle.wdLineStyleDouble;
                     //表格置中
                     //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
                     //這才有效：//http://www.wordbanter.com/showthread.php?t=110960
-                    tb.Rows.Alignment = WinWord.WdRowAlignment.wdAlignRowCenter;
+                    tb.Rows.Alignment = winWord.WdRowAlignment.wdAlignRowCenter;
                     inlsp.Select(); Selection.Cut();//剪下圖片貼入表格
                     tb.Cell(1, 2).Range.Characters[1].Select();
                     Selection.Paste();
-                    tb.PreferredWidthType = WinWord.WdPreferredWidthType.wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
+                    tb.PreferredWidthType = winWord.WdPreferredWidthType.wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
                     tb.PreferredWidth = (float)549.6378;//Selection.Document.Tables[r].PreferredWidth;
-                    tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
+                    tb.Range.ParagraphFormat.Alignment = winWord.WdParagraphAlignment.wdAlignParagraphCenter;
                     Selection.MoveDown();
                     //Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
                     //與下一分割出來的表格空2行（段）
@@ -176,17 +159,8 @@ namespace Doc_PPt
 
         }
 
-        private string getDocFullname()
-        {
-            TextBox textBox1 = (TextBox)Application.OpenForms[0].Controls["textBox1"];
-            if (textBox1.Text.IndexOf("字源圖片") > 1)
-            {
-                return textBox1.Text.Replace(@"file:///", "").Replace("%20", " ");
-            }
-            else
-            {
-                MessageBox.Show("請在textBox1文字方塊輸入「字源圖片」的全檔名"); return "";
-            }
-        }
+        
+
+        
     }
 }
