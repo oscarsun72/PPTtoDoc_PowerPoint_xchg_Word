@@ -9,7 +9,7 @@ namespace Doc_PPt
 {
     class TableDocOps
     {
-        WinWord.Application wdApp;
+        readonly WinWord.Application wdApp;
         public TableDocOps()
         {
             try
@@ -28,34 +28,34 @@ namespace Doc_PPt
 
         internal void splitTableByEachRowTitleed字源圖片()
         {
-            WinWord.Document d = wdApp.ActiveDocument;
-            if (d.Name != "＃字源圖片 （象形）.docx")
+            WinWord.Document d; const string docName = "＃字源圖片 （象形）.docx"; string dFullname = "";
+            if (wdApp.Documents.Count > 0)
             {
-                foreach (WinWord.Document item in wdApp.Documents)
+                d = wdApp.ActiveDocument;
+                if (d.Name != docName)
                 {
-                    if (item.Name == "＃字源圖片 （象形）.docx")
+                    foreach (WinWord.Document item in wdApp.Documents)
                     {
-                        item.Activate(); d = item; break;
-                    }
-                }
-                string dFullname = "";
-                if (wdApp.ActiveDocument.Name != "＃字源圖片 （象形）.docx")
-                {
-                    TextBox textBox1 = (TextBox)Application.OpenForms[0].Controls["textBox1"];
-                    if (textBox1.Text.IndexOf("字源圖片") > 1)
-                    {
-                        dFullname = textBox1.Text.Replace(@"file:///", "").Replace("%20", " ");
-                    }
-                    else
-                    {
-                        MessageBox.Show("請在textBox1文字方塊輸入「字源圖片」的全檔名"); return;
+                        if (item.Name == docName)
+                        {
+                            item.Activate(); d = item; break;
+                        }
                     }
                 }
 
+                if (d.Name != docName)
+                {
+                    dFullname = getDocFullname();
+                }
                 if (dFullname == "" || !File.Exists(dFullname))
                 {
                     MessageBox.Show("請在textBox1文字方塊輸入「字源圖片」的「正確的」全檔名"); return;
                 }
+                d = wdApp.Documents.Open(dFullname);
+            }
+            else
+            {
+                dFullname = getDocFullname();
                 d = wdApp.Documents.Open(dFullname);
             }
             d.Tables[1].Cell(3, 1).Range.Characters[1].Select();
@@ -146,17 +146,14 @@ namespace Doc_PPt
                     tb = Selection.Tables.Add(Selection.Range, 1, 2);
                     tb.Borders.InsideLineStyle = WinWord.WdLineStyle.wdLineStyleSingle;
                     tb.Borders.OutsideLineStyle = WinWord.WdLineStyle.wdLineStyleDouble;
-                    //tb.AutoFitBehavior(WinWord.WdAutoFitBehavior.wdAutoFitFixed);
-                    //tb.Cell(1, 1).SetWidth(Selection.Document.Tables[r].PreferredWidth -
-                    //  tb.Cell(1, 2).Width, WinWord.WdRulerStyle.wdAdjustNone);
                     //表格置中
                     //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
-                    //這才有效：
-                    tb.Rows.Alignment=WinWord.WdRowAlignment.wdAlignRowCenter;
+                    //這才有效：//http://www.wordbanter.com/showthread.php?t=110960
+                    tb.Rows.Alignment = WinWord.WdRowAlignment.wdAlignRowCenter;
                     inlsp.Select(); Selection.Cut();//剪下圖片貼入表格
                     tb.Cell(1, 2).Range.Characters[1].Select();
                     Selection.Paste();
-                    tb.PreferredWidthType = WinWord.WdPreferredWidthType.wdPreferredWidthPoints;
+                    tb.PreferredWidthType = WinWord.WdPreferredWidthType.wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
                     tb.PreferredWidth = (float)549.6378;//Selection.Document.Tables[r].PreferredWidth;
                     tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
                     Selection.MoveDown();
@@ -179,6 +176,17 @@ namespace Doc_PPt
 
         }
 
-
+        private string getDocFullname()
+        {
+            TextBox textBox1 = (TextBox)Application.OpenForms[0].Controls["textBox1"];
+            if (textBox1.Text.IndexOf("字源圖片") > 1)
+            {
+                return textBox1.Text.Replace(@"file:///", "").Replace("%20", " ");
+            }
+            else
+            {
+                MessageBox.Show("請在textBox1文字方塊輸入「字源圖片」的全檔名"); return "";
+            }
+        }
     }
 }
