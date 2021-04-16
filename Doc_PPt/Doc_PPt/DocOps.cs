@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows.Forms;
-using winWord= Microsoft.Office.Interop.Word;
+using winWord = Microsoft.Office.Interop.Word;
 
 namespace Doc_PPt
 {
@@ -14,17 +9,17 @@ namespace Doc_PPt
         static winWord.Application wdApp;
         public DocOps()
         {
-            wdApp =docApp.getDocApp();
+            wdApp = docApp.getDocApp();
         }
         internal static winWord.Document openDoc(string docFullname)
         {
             //string dFullname = getDocFullname();
             if (docFullname == "" || !File.Exists(docFullname))
             {
-                MessageBox.Show("請在textBox1文字方塊輸入「字源圖片」的「正確的」全檔名"); 
+                MessageBox.Show("請在textBox1文字方塊輸入「字源圖片」的「正確的」全檔名");
                 return null;
             }
-            return  wdApp.Documents.Open(docFullname);
+            return wdApp.Documents.Open(docFullname);
         }
 
         internal static string getDocFullname()
