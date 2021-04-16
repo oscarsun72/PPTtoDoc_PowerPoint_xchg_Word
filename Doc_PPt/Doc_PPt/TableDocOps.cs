@@ -1,9 +1,5 @@
 ﻿using Microsoft.Office.Core;
-using System;
-using System.IO;
 using System.Media;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using winWord = Microsoft.Office.Interop.Word;
 namespace Doc_PPt
 {
@@ -19,7 +15,7 @@ namespace Doc_PPt
 
 
         internal void splitTableByEachRowTitleed字源圖片()
-        {            
+        {
             if (wdApp.Documents.Count > 0)
             {
                 d = wdApp.ActiveDocument;
@@ -35,11 +31,11 @@ namespace Doc_PPt
                 }
 
                 if (d.Name != docName)
-                    d=DocOps.openDoc(DocOps.getDocFullname());
+                    d = DocOps.openDoc(DocOps.getDocFullname());
             }
             else
             {
-                d= DocOps.openDoc(DocOps.getDocFullname());
+                d = DocOps.openDoc(DocOps.getDocFullname());
             }
             d.Tables[1].Cell(3, 1).Range.Characters[1].Select();
             winWord.Selection Selection = d.ActiveWindow.Selection;
@@ -159,8 +155,8 @@ namespace Doc_PPt
 
         }
 
-        
 
-        
+
+
     }
 }
