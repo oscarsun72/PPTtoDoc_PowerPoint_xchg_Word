@@ -1,7 +1,7 @@
 # PPTtoDoc_PowerPoint_xchg_Word_DocSwitchPPT
  pptx and docx switch .ppt and doc, PowerPoint and Word automation exchange and interoperation
  
- PowerPoint ppt pptx 檔與 Word doc docx 檔之間的互動操作程式設計與開發
+ PowerPoint ppt pptx 檔與 Word doc docx 檔之間的互動操作程式設計與開發；也藉以嫻熟自己這方面的知識與技術
  
 ## 【本計畫之緣起】：
 
