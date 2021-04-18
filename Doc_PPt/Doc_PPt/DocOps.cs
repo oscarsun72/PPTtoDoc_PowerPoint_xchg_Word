@@ -6,12 +6,12 @@ namespace Doc_PPt
 {
     public class DocOps
     {
-        static winWord.Application wdApp;
+        winWord.Application wdApp;
         public DocOps()
         {
             wdApp = docApp.getDocApp();
         }
-        internal static winWord.Document openDoc(string docFullname)
+        internal  winWord.Document openDoc(string docFullname)
         {
             //string dFullname = getDocFullname();
             if (docFullname == "" || !File.Exists(docFullname))

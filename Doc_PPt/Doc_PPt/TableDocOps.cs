@@ -31,12 +31,19 @@ namespace Doc_PPt
                 }
 
                 if (d.Name != docName)
-                    d = DocOps.openDoc(DocOps.getDocFullname());
+                {
+                    DocOps doc = new DocOps();
+                    d = doc.openDoc(DocOps.getDocFullname());
+                    if (d==null)return;
+                }
             }
             else
             {
-                d = DocOps.openDoc(DocOps.getDocFullname());
+                DocOps doc = new DocOps();
+                d = doc.openDoc(DocOps.getDocFullname());
+                if (d == null)return;
             }
+            //放在指定位置以開始
             d.Tables[1].Cell(3, 1).Range.Characters[1].Select();
             winWord.Selection Selection = d.ActiveWindow.Selection;
             Selection.Collapse(winWord.WdCollapseDirection.wdCollapseStart);
@@ -48,20 +55,43 @@ namespace Doc_PPt
             rng = Selection.Range;
             wdApp.ScreenUpdating = false;
             d.Tables[1].Rows.Add(); d.Tables[1].Rows.Add();//最後會留下一個表格再予刪除
-            while (Selection.Information[winWord.WdInformation.wdWithInTable])
+            int picsCount =0;
+            while (Selection.Information[winWord.WdInformation.
+                wdWithInTable])
             {
                 Selection.SplitTable();
                 /* 表格置中都無效
                  * Selection.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
                 */
                 rw = Selection.Document.Tables[1].Rows[1];
-                rw.Range.Copy();
-                Selection.Document.Tables[Selection.Document.Tables.Count].Range.Characters[1].Select();
-                Selection.Collapse(winWord.WdCollapseDirection.wdCollapseStart);
-                Selection.Paste();
-                Selection.Document.Tables[Selection.Document.Tables.Count].Range.Characters[1].Select();
-                Selection.Collapse(winWord.WdCollapseDirection.wdCollapseStart);
-                Selection.MoveLeft();
+                rw.Range.Copy();//準備標題列
+                Selection.Document.Tables[Selection.Document.
+                    Tables.Count].Range.Characters[1].Select();
+                Selection.Collapse(winWord.WdCollapseDirection.
+                    wdCollapseStart);
+                Selection.Paste();//貼上標題列
+                Selection.Document.Tables[Selection.Document.Tables.Count]
+                    .Range.Characters[1].Select();
+                Selection.Collapse(winWord.WdCollapseDirection.
+                    wdCollapseStart);
+                Selection.MoveLeft();//分割完表格，就定位
+                Selection.InsertParagraphAfter();
+                Selection.Collapse(winWord.WdCollapseDirection.
+                    wdCollapseEnd);
+
+                //插入表格，準備將圖片置入
+                tb = Selection.Tables.Add(Selection.Range, 2, 2);
+                tb.Rows[2].Cells.Merge();//第二列合併儲存格
+                tb.Borders.InsideLineStyle = //內框樣式
+                    winWord.WdLineStyle.wdLineStyleSingle;
+                tb.Borders.OutsideLineStyle =//外框樣式 
+                    winWord.WdLineStyle.wdLineStyleDouble;
+                //表格置中
+                //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
+                //這才有效：//http://www.wordbanter.com/showthread.php?t=110960
+                tb.Rows.Alignment = winWord.WdRowAlignment.
+                    wdAlignRowCenter;
+
                 if (Selection.Document.Tables[r].Rows.Count == 1)
                     cel = Selection.Document.Tables[r].Cell(1, 8);
                 else
@@ -72,16 +102,21 @@ namespace Doc_PPt
                     if (Selection.Document.Tables[r].Rows.Count > 1)
                         cel = Selection.Document.Tables[r].Cell(2, 8);
                 }
+
                 s = Selection.Start;
-                rng.SetRange(s, s);
-                if (cel.Range.InlineShapes.Count > 0)
+                rng.SetRange(s, s);//記下圖片要貼上的位置
+                picsCount =cel.Range.InlineShapes.Count;
+                if (picsCount>0)
                 {
-                    cel.Range.InlineShapes[1].Select();
-                    Selection.Cut();
-                    s1 = Selection.Start;
-                    if (s1 > s)
+                    inlsp = cel.Range.InlineShapes[1];
+                    inlsp.Select();
+                    Selection.Cut();//剪下圖片，準備移動位置
+                    #region 圖片若不貼新表格中，則如下：
+                    /*                    s1 = Selection.Start;
+                    if (s1 > s)//兩種inlineshape圖形作用不同，故須分別處置
                     {
-                        while (rng.Information[winWord.WdInformation.wdWithInTable])
+                        while (rng.Information[winWord.WdInformation
+                            .wdWithInTable])
                         {
                             s1--;
                             rng.SetRange(s1, s1);
@@ -96,16 +131,19 @@ namespace Doc_PPt
                         }
 
                     }
+
                     rng.Select();
                     Selection.Paste();//圖片貼到定位
 
-                    //foreach (WinWord.InlineShape insp in Selection.Previous().InlineShapes)
+                    //foreach (WinWord.InlineShape insp in
+                    //              Selection.Previous().InlineShapes)
                     //{
                     //    inlsps.Add(insp);
                     //    insp.Height += 181;
                     //    insp.Width += 181;
                     //}
 
+                    //docx檔中的圖形有二種，貼上後插入點位置也不同，故皆須分別處置
                     if (Selection.Previous().InlineShapes.Count > 0)
                     {
                         inlsp = Selection.Previous().InlineShapes[1];
@@ -113,35 +151,34 @@ namespace Doc_PPt
                         inlsp.Height = 200;
                     }//調整圖片大小
                     else
-                    {
+                    {//這種選取後周邊呈虛線形的圖形，與一般的圖形剪下貼上後插入點的落點會不同(會在貼上的圖形前），且用Selection.Next()也取不到它，須先將其選取 20210418
                         Selection.MoveRight(winWord.WdUnits.wdCharacter, 1, winWord.WdMovementType.wdExtend);
                         inlsp = Selection.InlineShapes[1];
                         inlsp.Height += 181;// = Selection.InlineShapes[1].Height + 181;
                         inlsp.Width += 181;//= Selection.InlineShapes[1].Height + 181;
+                        Selection.Collapse(winWord.WdCollapseDirection.wdCollapseEnd);
                     }
                     //圖片置中
                     //Selection.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
-                    //插入表格，將圖片置入
-                    tb = Selection.Tables.Add(Selection.Range, 1, 2);
-                    tb.Borders.InsideLineStyle = winWord.WdLineStyle.wdLineStyleSingle;
-                    tb.Borders.OutsideLineStyle = winWord.WdLineStyle.wdLineStyleDouble;
-                    //表格置中
-                    //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
-                    //這才有效：//http://www.wordbanter.com/showthread.php?t=110960
-                    tb.Rows.Alignment = winWord.WdRowAlignment.wdAlignRowCenter;
-                    inlsp.Select(); Selection.Cut();//剪下圖片貼入表格
+                    
+                    inlsp.Select(); Selection.Cut();//剪下圖片貼入新插入的表格中
+                    */
+                    #endregion
                     tb.Cell(1, 2).Range.Characters[1].Select();
                     Selection.Paste();
-                    tb.PreferredWidthType = winWord.WdPreferredWidthType.wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
-                    tb.PreferredWidth = (float)549.6378;//Selection.Document.Tables[r].PreferredWidth;
-                    tb.Range.ParagraphFormat.Alignment = winWord.WdParagraphAlignment.wdAlignParagraphCenter;
-                    Selection.MoveDown();
+                    tb.PreferredWidthType = winWord.WdPreferredWidthType.
+                        wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
+                    tb.PreferredWidth = (float)549.6378;//固定表格寬度 Selection.Document.Tables[r].PreferredWidth;
+                    tb.Range.ParagraphFormat.Alignment = winWord.
+                        WdParagraphAlignment.wdAlignParagraphCenter;
+                    Selection.MoveDown(Count:2);
                     //Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
-                    //與下一分割出來的表格空2行（段）
+                    //與下一分割出來的表格空2行（段）--即與下一個漢字字源表分開來（距離拉開）
                     Selection.InsertParagraphAfter(); Selection.InsertParagraphAfter();
                 }
-                Selection.Document.Tables[r].Columns[8].Cells.Delete();
-                r += 2;//r++; r++; //前面Tables.Add多插一表格，計數要再加1
+                //以上有圖時的處理，以下缺圖者亦同然：
+                Selection.Document.Tables[r].Columns[8].Cells.Delete();//原來放置圖片的那欄刪除
+                r+=2; //前面Tables.Add多插一表格，計數要再加1
                 if (r > d.Tables.Count) break;
                 if (Selection.Document.Tables[r].Rows.Count > 3)//結束時，尚須修改。目前可以權且加幾空白列在最後一列後
                     Selection.Document.Tables[r].Rows[3].Select();
