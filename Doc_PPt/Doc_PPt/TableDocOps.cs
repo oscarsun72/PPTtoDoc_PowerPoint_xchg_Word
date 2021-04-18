@@ -47,7 +47,7 @@ namespace Doc_PPt
             d.Tables[1].Cell(3, 1).Range.Characters[1].Select();
             winWord.Selection Selection = d.ActiveWindow.Selection;
             Selection.Collapse(winWord.WdCollapseDirection.wdCollapseStart);
-            int r, s, s1; winWord.Cell cel; winWord.Range rng;
+            int r, s; winWord.Cell cel; winWord.Range rng;
             winWord.InlineShape inlsp; winWord.Table tb;
             //List<WinWord.InlineShape> inlsps = new List<WinWord.InlineShape>();
             winWord.Row rw;
@@ -55,7 +55,7 @@ namespace Doc_PPt
             rng = Selection.Range;
             wdApp.ScreenUpdating = false;
             d.Tables[1].Rows.Add(); d.Tables[1].Rows.Add();//最後會留下一個表格再予刪除
-            int picsCount =0;
+            int picsCount;
             while (Selection.Information[winWord.WdInformation.
                 wdWithInTable])
             {
@@ -91,6 +91,11 @@ namespace Doc_PPt
                 //這才有效：//http://www.wordbanter.com/showthread.php?t=110960
                 tb.Rows.Alignment = winWord.WdRowAlignment.
                     wdAlignRowCenter;
+                tb.PreferredWidthType = winWord.WdPreferredWidthType.
+                    wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
+                tb.PreferredWidth = (float)549.6378;//固定表格寬度 Selection.Document.Tables[r].PreferredWidth;
+                tb.Range.ParagraphFormat.Alignment = winWord.
+                    WdParagraphAlignment.wdAlignParagraphCenter;
 
                 if (Selection.Document.Tables[r].Rows.Count == 1)
                     cel = Selection.Document.Tables[r].Cell(1, 8);
@@ -166,11 +171,6 @@ namespace Doc_PPt
                     #endregion
                     tb.Cell(1, 2).Range.Characters[1].Select();
                     Selection.Paste();
-                    tb.PreferredWidthType = winWord.WdPreferredWidthType.
-                        wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
-                    tb.PreferredWidth = (float)549.6378;//固定表格寬度 Selection.Document.Tables[r].PreferredWidth;
-                    tb.Range.ParagraphFormat.Alignment = winWord.
-                        WdParagraphAlignment.wdAlignParagraphCenter;
                     Selection.MoveDown(Count:2);
                     //Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
                     //與下一分割出來的表格空2行（段）--即與下一個漢字字源表分開來（距離拉開）
