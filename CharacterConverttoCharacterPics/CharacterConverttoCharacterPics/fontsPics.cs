@@ -154,7 +154,7 @@ namespace CharacterConverttoCharacterPics
             fontCharacterset.Close();
             if (App.DocAppOpenByCode) appDoc.Quit();
             appDoc = null;
-            warnings.playSound();// (ppt.Slides.Count);
+            //warnings.playSound();// (ppt.Slides.Count);
         }
 
         static void exportPng(powerPnt.Presentation ppt, string picDir)
