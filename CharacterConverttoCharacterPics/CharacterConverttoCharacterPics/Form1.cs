@@ -48,6 +48,23 @@ namespace CharacterConverttoCharacterPics
 
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.T://test測試用
+                    //warnings.playSound();
+                    break;
+                case Keys.Escape:
+                    this.Close();
+                    break;
+                case Keys.Enter:
+                    goFontsCharsToPics();
+                    break;
+                default:
+                    break;
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             goFontsCharsToPics();
@@ -71,6 +88,7 @@ namespace CharacterConverttoCharacterPics
                     Int32.Parse(textBox4.Text));
                 BackColor = Color.Green;
                 this.Enabled = true; button1.Enabled = true;
+                warnings.playSound();
             }
         }
 
@@ -109,22 +127,6 @@ string dirPath = textBox1.Text;
             }
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.T://test測試用
-                    List<string>ls= FontsOpsDoc.fontOkList;
-                    break;
-                case Keys.Escape:
-                    this.Close();
-                    break;
-                case Keys.Enter:
-                    goFontsCharsToPics();
-                    break;
-                default:
-                    break;
-            }
-        }
+ 
     }
 }
