@@ -72,6 +72,7 @@ namespace CharacterConverttoCharacterPics
 
         private void goFontsCharsToPics()
         {
+            BackColor = Color.Gray;
             this.Enabled = false; button1.Enabled = false;
             string fontname = textBox2.Text;
             WinWord.Document wd = fontsPics.getFontCharacterset
