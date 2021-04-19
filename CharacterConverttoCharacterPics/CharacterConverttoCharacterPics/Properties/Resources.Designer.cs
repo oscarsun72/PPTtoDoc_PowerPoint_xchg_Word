@@ -69,5 +69,15 @@ namespace CharacterConverttoCharacterPics.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap openFolder {
+            get {
+                object obj = ResourceManager.GetObject("openFolder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

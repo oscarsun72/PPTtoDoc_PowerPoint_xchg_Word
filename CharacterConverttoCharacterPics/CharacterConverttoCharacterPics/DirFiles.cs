@@ -38,9 +38,17 @@ namespace CharacterConverttoCharacterPics
             return getCjk_basic_IDS_UCS_Basic_txt().DirectoryName;
         }
 
-        internal static powerPnt.Presentation get字圖母片pptm()
+        internal powerPnt.Presentation get字圖母片pptm()
         {
-            return App.AppPpt.Presentations.Open(
+            powerPnt.Application pptApp = App.AppPpt;
+            foreach (powerPnt.Presentation ppt in pptApp.Presentations)
+            {
+                if (ppt.Name== "字圖母片.pptm")
+                {
+                    return ppt;
+                }
+            }
+            return pptApp.Presentations.Open(
                 getDirRoot + "字圖母片.pptm");
         }
 

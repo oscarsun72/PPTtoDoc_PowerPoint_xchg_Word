@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using WinWord = Microsoft.Office.Interop.Word;
-
+using powerPnt = Microsoft.Office.Interop.PowerPoint;
 
 
 namespace CharacterConverttoCharacterPics
@@ -41,18 +43,21 @@ namespace CharacterConverttoCharacterPics
 
         private void button1_Click(object sender, EventArgs e)
         {
-            WinWord.Document wd = fontsPics.getFontCharacterset(textBox2.Text);
+            string fontname = textBox2.Text;
+            WinWord.Document wd = fontsPics.getFontCharacterset
+                (fontname);
             if (wd != null)
             {
-                BackColor = Color.Red; button1.Enabled = false;
-                string picFolder = textBox1.Text, fontname = textBox2.Text;
+                BackColor = Color.Red;
+                this.Enabled = false;button1.Enabled = false;
+                string picFolder = textBox1.Text;
                 if (picFolder.IndexOf(fontname) == -1)
                 { picFolder += ("\\" + fontname + "\\"); }
-                fontsPics.addCharsSlidesExportPng(wd,
-                    fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text))
-                    , picFolder);
+                powerPnt.Presentation ppt = 
+                    fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text));
+                fontsPics.addCharsSlidesExportPng(wd,ppt,picFolder);
                 BackColor = Color.Green;
-                button1.Enabled = true;
+                this.Enabled = true; button1.Enabled = true;
             }
         }
 
@@ -72,6 +77,35 @@ namespace CharacterConverttoCharacterPics
                 return;
             }
             button1.Enabled = true;
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = Clipboard.GetText();
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+string dirPath = textBox1.Text;
+            if (Directory.Exists( dirPath))
+            {//開啟資料夾：
+                Process prc = new Process();
+                prc.StartInfo.FileName = dirPath;
+                prc.Start();
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    this.Close();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
