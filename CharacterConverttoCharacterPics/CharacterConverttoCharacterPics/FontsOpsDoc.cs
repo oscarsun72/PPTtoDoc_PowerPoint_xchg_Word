@@ -78,7 +78,7 @@ namespace CharacterConverttoCharacterPics
             }
             ThisDocument.Save();
             warnings.playBeep();
-            warnings.playSound();
+            //warnings.playSound();
         }
 
 
@@ -93,7 +93,7 @@ namespace CharacterConverttoCharacterPics
                 //    //Stop
                 //}
             }
-            warnings.playSound();
+            //warnings.playSound();
             SystemSounds.Beep.Play();
             //'Dim strFont As String
             //'Dim intResponse As Integer

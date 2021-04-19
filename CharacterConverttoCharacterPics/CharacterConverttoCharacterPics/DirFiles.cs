@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using powerPnt = Microsoft.Office.Interop.PowerPoint;
 
 namespace CharacterConverttoCharacterPics
@@ -72,6 +73,16 @@ namespace CharacterConverttoCharacterPics
             {
                 Directory.CreateDirectory(picFolderPath);
             }
+        }
+        public static void openFolder(string picDir)
+        {
+            //Process.Start(picDir);//Shell "explorer " & pth, vbMaximizedFocus;
+            //開啟資料夾：https://happyduck1020.pixnet.net/blog/post/34382453-c%23-%E9%96%8B%E5%95%9F%E8%B3%87%E6%96%99%E5%A4%BE
+            System.Diagnostics.Process prc = new System.Diagnostics.Process();
+            prc.StartInfo.FileName = picDir;
+            prc.Start();
+            Application.DoEvents();
+            warnings.playBeep();
         }
     }
 }

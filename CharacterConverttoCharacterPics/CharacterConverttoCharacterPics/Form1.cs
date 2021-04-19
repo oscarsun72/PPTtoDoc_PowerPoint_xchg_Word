@@ -72,13 +72,13 @@ namespace CharacterConverttoCharacterPics
 
         private void goFontsCharsToPics()
         {
+            this.Enabled = false; button1.Enabled = false;
             string fontname = textBox2.Text;
             WinWord.Document wd = fontsPics.getFontCharacterset
                 (fontname);
             if (wd != null)
             {
                 BackColor = Color.Red;
-                this.Enabled = false; button1.Enabled = false;
                 string picFolder = textBox1.Text;
                 if (picFolder.IndexOf(fontname) == -1)
                 { picFolder += ("\\" + fontname + "\\"); }
@@ -87,9 +87,9 @@ namespace CharacterConverttoCharacterPics
                 fontsPics.addCharsSlidesExportPng(wd, ppt, picFolder,
                     Int32.Parse(textBox4.Text));
                 BackColor = Color.Green;
-                this.Enabled = true; button1.Enabled = true;
                 warnings.playSound();
             }
+            this.Enabled = true; button1.Enabled = true;
         }
 
         private void textBox2_Click(object sender, EventArgs e)
