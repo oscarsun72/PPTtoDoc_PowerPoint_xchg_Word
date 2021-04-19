@@ -45,8 +45,8 @@ namespace CharacterConverttoCharacterPics
             if (wd != null)
             {
                 BackColor = Color.Red;
-                string picFolder = textBox1.Text,fontname= textBox2.Text;
-                if (picFolder.IndexOf(fontname)==-1)
+                string picFolder = textBox1.Text, fontname = textBox2.Text;
+                if (picFolder.IndexOf(fontname) == -1)
                 { picFolder += ("\\" + fontname + "\\"); }
                 fontsPics.addCharsSlidesExportPng(wd,
                     fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text))
@@ -58,6 +58,19 @@ namespace CharacterConverttoCharacterPics
         private void textBox2_Click(object sender, EventArgs e)
         {
             textBox2.Text = Clipboard.GetText();
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            if (FontsOpsDoc.fontOkList.Contains(textBox2.Text))
+            {
+                MessageBox.Show("這個字型已經做過了！或是不必做的","請檢查！",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                button1.Enabled = false;
+                return;
+            }
+            button1.Enabled = true;
         }
     }
 }

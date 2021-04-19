@@ -65,6 +65,7 @@ namespace CharacterConverttoCharacterPics
             this.textBox2.TabIndex = 2;
             this.textBox2.Text = "標楷體";
             this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
             // 
