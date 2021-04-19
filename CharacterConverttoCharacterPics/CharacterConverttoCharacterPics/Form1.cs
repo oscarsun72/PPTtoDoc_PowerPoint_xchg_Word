@@ -43,19 +43,24 @@ namespace CharacterConverttoCharacterPics
 
         private void button1_Click(object sender, EventArgs e)
         {
+            goFontsCharsToPics();
+        }
+
+        private void goFontsCharsToPics()
+        {
             string fontname = textBox2.Text;
             WinWord.Document wd = fontsPics.getFontCharacterset
                 (fontname);
             if (wd != null)
             {
                 BackColor = Color.Red;
-                this.Enabled = false;button1.Enabled = false;
+                this.Enabled = false; button1.Enabled = false;
                 string picFolder = textBox1.Text;
                 if (picFolder.IndexOf(fontname) == -1)
                 { picFolder += ("\\" + fontname + "\\"); }
-                powerPnt.Presentation ppt = 
+                powerPnt.Presentation ppt =
                     fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text));
-                fontsPics.addCharsSlidesExportPng(wd,ppt,picFolder);
+                fontsPics.addCharsSlidesExportPng(wd, ppt, picFolder);
                 BackColor = Color.Green;
                 this.Enabled = true; button1.Enabled = true;
             }
@@ -102,6 +107,9 @@ string dirPath = textBox1.Text;
             {
                 case Keys.Escape:
                     this.Close();
+                    break;
+                case Keys.Enter:
+                    goFontsCharsToPics();
                     break;
                 default:
                     break;
