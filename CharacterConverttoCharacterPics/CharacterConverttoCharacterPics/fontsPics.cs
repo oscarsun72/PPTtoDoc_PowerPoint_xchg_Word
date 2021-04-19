@@ -47,11 +47,14 @@ namespace CharacterConverttoCharacterPics
             return ppt;
         }
 
+        static  int charPicCounter= 0;
+        public int CharPicCounter { get => charPicCounter; }
 
         static void addCharsSlides(winWord.Document fontCharacterset,
             powerPnt.Presentation ppt)
         {
-            string X = ""; int i = 0; powerPnt.SlideRange sld;
+            string X = "";  powerPnt.SlideRange sld;
+            Button btn=(Button)Application.OpenForms[0].Controls["button1"];
             //if f = "" Then Exit Sub
             //If InStr(f, "?") Then
             //    MsgBox "路徑中有亂碼，請檢查，或修改程式"
@@ -71,10 +74,12 @@ namespace CharacterConverttoCharacterPics
                         X += an.Text;
                         sld = ppt.Slides[ppt.Slides.Count].Duplicate();
                         sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
-                        i++;
-                        if (i % 500 == 0)
+                        charPicCounter++;
+                        if (charPicCounter % 500 == 0)
                         { //https://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/operators/arithmetic-operators
-                            fontCharacterset.Application.StatusBar = "已處理" + i + "個字";
+                            //fontCharacterset.Application.StatusBar = "已處理" + i + "個字";
+                            btn.Text= "已處理" + charPicCounter + "個字";
+                            btn.Parent.Refresh();
                         }
                     }
                 }

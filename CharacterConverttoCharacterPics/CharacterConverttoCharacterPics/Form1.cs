@@ -44,7 +44,7 @@ namespace CharacterConverttoCharacterPics
             WinWord.Document wd = fontsPics.getFontCharacterset(textBox2.Text);
             if (wd != null)
             {
-                BackColor = Color.Red;
+                BackColor = Color.Red; button1.Enabled = false;
                 string picFolder = textBox1.Text, fontname = textBox2.Text;
                 if (picFolder.IndexOf(fontname) == -1)
                 { picFolder += ("\\" + fontname + "\\"); }
@@ -52,6 +52,7 @@ namespace CharacterConverttoCharacterPics
                     fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text))
                     , picFolder);
                 BackColor = Color.Green;
+                button1.Enabled = true;
             }
         }
 
