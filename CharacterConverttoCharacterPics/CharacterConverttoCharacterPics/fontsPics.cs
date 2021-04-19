@@ -11,7 +11,7 @@ namespace CharacterConverttoCharacterPics
     {
         static winWord.Application appDoc = App.AppDoc;
         //static powerPnt.Application appPpt = App.AppPpt;
-        internal static winWord.Document 
+        internal static winWord.Document
             getFontCharacterset(string fontName)
         {//準備好各字型檔(不含缺字)相關者
             //https://www.google.com/search?q=c%23+%E8%AE%80%E5%8F%96txt&rlz=1C1JRYI_enTW948TW948&sxsrf=ALeKk00EZy0V-LIAiQBz6f5tr6PPx2AI4w%3A1618768409405&ei=GXJ8YKmVGIu9mAW1io6QDw&oq=c%23+%E8%AE%80%E5%8F%96&gs_lcp=Cgdnd3Mtd2l6EAMYADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELADOgQIIxAnOgQIABBDOgcIABCxAxBDOgQIABAeOgYIABAIEB46CAgAEAgQChAeULWyUlih0FNg-uhTaAtwAHgBgAGPBogB2gmSAQU3LjYtMZgBAKABAaoBB2d3cy13aXrIAQHAAQE&sclient=gws-wiz            
@@ -34,7 +34,7 @@ namespace CharacterConverttoCharacterPics
                     Application.OpenForms[0].BackColor = Color.White;
                     return null;
                 }//沿用舊檔
-                d.Close(winWord.WdSaveOptions.wdDoNotSaveChanges);                
+                d.Close(winWord.WdSaveOptions.wdDoNotSaveChanges);
                 return appDoc.Documents.Open(docName);
             }
             else//不存在舊檔
@@ -134,11 +134,13 @@ namespace CharacterConverttoCharacterPics
                 foreach (powerPnt.Presentation item in ppts)
                 {
                     pptSlidesCtr += (item.Slides.Count - 1);//每檔皆會有第一張空白投影片
-                    exportPng(item, exportDir);//直接轉成字圖 20210419
+                    exportPng(item, exportDir,ppts.Count);//直接轉成字圖 20210419
                 }
+
                 if (++pptSlidesCtr != fontCharactersetCount)//投影片總數加1則與Word檔文字總數會包括最後一個分段符號吻合
                     MessageBox.Show("字數有所不同，請留意！", "注意：",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DirFiles.openFolder(exportDir);
             }
             else//沒有分割（分別存）ppt檔的話
             {
@@ -157,7 +159,8 @@ namespace CharacterConverttoCharacterPics
             //warnings.playSound();// (ppt.Slides.Count);
         }
 
-        static void exportPng(powerPnt.Presentation ppt, string picDir)
+        static void exportPng(powerPnt.Presentation ppt, string picDir
+            , int pptsCount = 0)
         {
             string w; DirFiles.getPicFolder(picDir);
             if (picDir == "") return;
@@ -169,15 +172,13 @@ namespace CharacterConverttoCharacterPics
                 if (w != "")//第一張投影片即是空白
                     sld.Export(picDir + w + ".png", "PNG");//https://docs.microsoft.com/zh-tw/office/vba/api/powerpoint.slide.export
             }
-            //Process.Start(picDir);//Shell "explorer " & pth, vbMaximizedFocus;
-            //開啟資料夾：https://happyduck1020.pixnet.net/blog/post/34382453-c%23-%E9%96%8B%E5%95%9F%E8%B3%87%E6%96%99%E5%A4%BE
-            System.Diagnostics.Process prc = new System.Diagnostics.Process();
-            prc.StartInfo.FileName = picDir;
-            prc.Start();
-            Application.DoEvents();
-            warnings.playBeep();
+            if (pptsCount == 0)
+            {
+                DirFiles.openFolder(picDir);
+            }
         }
 
+        
     }
 
 }
