@@ -113,9 +113,10 @@ namespace CharacterConverttoCharacterPics
         }
 
         internal static void addCharsSlidesExportPng(winWord.Document fontCharacterset,
-            powerPnt.Presentation ppt, string exportDir)
+            powerPnt.Presentation ppt, string exportDir, int howManyCharsPPT = 5000)
         {
-            List<powerPnt.Presentation> ppts = addCharsSlides(fontCharacterset, ppt);
+            List<powerPnt.Presentation> ppts = addCharsSlides(
+                fontCharacterset, ppt,howManyCharsPPT);
             int fontCharactersetCount = fontCharacterset.Range().Characters.Count;
             if (ppts.Count > 0)
             {

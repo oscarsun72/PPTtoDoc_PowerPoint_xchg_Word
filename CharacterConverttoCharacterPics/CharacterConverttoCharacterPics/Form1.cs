@@ -67,7 +67,8 @@ namespace CharacterConverttoCharacterPics
                 { picFolder += ("\\" + fontname + "\\"); }
                 powerPnt.Presentation ppt =
                     fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text));
-                fontsPics.addCharsSlidesExportPng(wd, ppt, picFolder);
+                fontsPics.addCharsSlidesExportPng(wd, ppt, picFolder,
+                    Int32.Parse(textBox4.Text));
                 BackColor = Color.Green;
                 this.Enabled = true; button1.Enabled = true;
             }
