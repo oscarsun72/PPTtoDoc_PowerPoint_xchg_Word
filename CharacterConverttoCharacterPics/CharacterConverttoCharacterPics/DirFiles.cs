@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using powerPnt = Microsoft.Office.Interop.PowerPoint;
 
@@ -16,7 +13,7 @@ namespace CharacterConverttoCharacterPics
             get =>
                 new DirectoryInfo(
                 System.AppDomain.CurrentDomain.BaseDirectory)
-                .Parent.Parent.Parent.Parent.FullName+"\\";
+                .Parent.Parent.Parent.Parent.FullName + "\\";
         }
 
         internal static FileInfo getCjk_basic_IDS_UCS_Basic_txt()
@@ -58,7 +55,7 @@ namespace CharacterConverttoCharacterPics
             powerPnt.Application pptApp = App.AppPpt;
             foreach (powerPnt.Presentation ppt in pptApp.Presentations)
             {
-                if (ppt.Name== "字圖母片.pptm")
+                if (ppt.Name == "字圖母片.pptm")
                 {
                     return ppt;
                 }
@@ -69,7 +66,7 @@ namespace CharacterConverttoCharacterPics
 
         internal static void getPicFolder(string picFolderPath)
         {
-            if (Directory.Exists(picFolderPath)==false)
+            if (Directory.Exists(picFolderPath) == false)
             {
                 Directory.CreateDirectory(picFolderPath);
             }
@@ -83,6 +80,24 @@ namespace CharacterConverttoCharacterPics
             prc.Start();
             Application.DoEvents();
             warnings.playBeep();
+        }
+
+        public static string searchRootDirChange(string dir)
+        {
+            if (Directory.Exists(dir) == false)
+            {
+                string newDir;
+                DriveInfo[] di = DriveInfo.GetDrives();//https://bit.ly/3mYEqw0
+                foreach (DriveInfo item in di)
+                {
+                    newDir = dir.Replace(Path.GetPathRoot(dir), item.Name);
+                    if (Directory.Exists(newDir))
+                        return newDir;
+                }
+                return "";
+            }
+            return dir;
+
         }
     }
 }
