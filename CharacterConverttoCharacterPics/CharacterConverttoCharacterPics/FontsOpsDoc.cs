@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Media;
 using winWord = Microsoft.Office.Interop.Word;
 
@@ -6,11 +7,44 @@ namespace CharacterConverttoCharacterPics
 {
     public class FontsOpsDoc
     {
-
-        public static List<string> fontOkList
+        public static List<string> fontOkList//這是製作字圖參考用的，表示是否需要做此字型之字圖
         {
-            get =>
-new List<string>{
+
+            get
+            {
+                List<string> fontoklist = new List<string>();
+                StreamReader sr = new StreamReader(
+                DirFiles.getFontOkList_txt().FullName);
+                string fontname;
+                while (!sr.EndOfStream)
+                {
+                    fontname = sr.ReadLine();                    
+                    if (fontname != ""&& fontname.IndexOf("::")== -1)
+                        fontoklist.Add(fontname);
+                }
+                return fontoklist;
+            }
+        }
+        public static List<string> fontPicsList//這是給執行插圖用的，表示真有此字型字圖
+        {
+
+            get
+            {
+                List<string> fontoklist = new List<string>();
+                StreamReader sr = new StreamReader(
+                DirFiles.getFontOkList_txt().FullName);
+                string fontname;
+                while (!sr.EndOfStream)
+                {
+                    fontname = sr.ReadLine();
+                    if (fontname.IndexOf("::") > -1) break;//以「::」記號作為選取中止
+                    if (fontname != "")
+                        fontoklist.Add(fontname);
+                }
+                return fontoklist;
+            }
+            /*get =>
+            new List<string>{
                 "標楷體", "新細明體", "微軟正黑體", "新細明體 (本文中文字型)", "+本文中文字型"
                 , "細明體_HKSCS", "細明體", "細明體_HKSCS-ExtB", "細明體-ExtB",
                  "教育部隸書",
@@ -29,8 +63,9 @@ new List<string>{
                 "文鼎雕刻體B", "DFKinBun-W3",
                 "DFGFuun-W7",
 
-                "華康行書體(P)", "DFPFuun-W7", "DFGyoSho-W7" //華康行書體(P)以下為沒必要做的}
-};
+                "華康行書體(P)", "DFPFuun-W7", "DFGyoSho-W7" //華康行書體(P)以下為沒必要做的
+
+        };*/
         }
         internal static void removeNoFont(winWord.Document ThisDocument, string fontname)
         {

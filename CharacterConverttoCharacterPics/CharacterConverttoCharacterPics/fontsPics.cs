@@ -11,8 +11,8 @@ namespace CharacterConverttoCharacterPics
     {
         static winWord.Application appDoc = App.AppDoc;
         //static powerPnt.Application appPpt = App.AppPpt;
-        internal static winWord.Document getFontCharacterset(
-                                            string fontName)
+        internal static winWord.Document 
+            getFontCharacterset(string fontName)
         {//準備好各字型檔(不含缺字)相關者
             //https://www.google.com/search?q=c%23+%E8%AE%80%E5%8F%96txt&rlz=1C1JRYI_enTW948TW948&sxsrf=ALeKk00EZy0V-LIAiQBz6f5tr6PPx2AI4w%3A1618768409405&ei=GXJ8YKmVGIu9mAW1io6QDw&oq=c%23+%E8%AE%80%E5%8F%96&gs_lcp=Cgdnd3Mtd2l6EAMYADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELADOgQIIxAnOgQIABBDOgcIABCxAxBDOgQIABAeOgYIABAIEB46CAgAEAgQChAeULWyUlih0FNg-uhTaAtwAHgBgAGPBogB2gmSAQU3LjYtMZgBAKABAaoBB2d3cy13aXrIAQHAAQE&sclient=gws-wiz            
             winWord.Document d = appDoc.Documents.Add("");
@@ -23,17 +23,27 @@ namespace CharacterConverttoCharacterPics
                 fontName + "(不含缺字).docx";
             if (File.Exists(docName))
             {
-                MessageBox.Show("檔名重複！請檢查，再繼續");
-                if (App.DocAppOpenByCode) appDoc.Quit(winWord.
-                    WdSaveOptions.wdDoNotSaveChanges);
-                appDoc = null;
-                Application.OpenForms[0].BackColor = Color.White;
-                return null;
+                DialogResult dr =
+                    MessageBox.Show("檔名重複！請檢查，再繼續...是否沿用舊檔？", "",
+                    MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+                if (dr == DialogResult.Cancel)
+                {
+                    if (App.DocAppOpenByCode) appDoc.Quit(winWord.
+                        WdSaveOptions.wdDoNotSaveChanges);
+                    appDoc = null;
+                    Application.OpenForms[0].BackColor = Color.White;
+                    return null;
+                }//沿用舊檔
+                d.Close(winWord.WdSaveOptions.wdDoNotSaveChanges);                
+                return appDoc.Documents.Open(docName);
             }
-            d.SaveAs2(docName);
-            FontsOpsDoc.removeNoFont(d, fontName);
-            d.Save();
-            return d;
+            else//不存在舊檔
+            {
+                d.SaveAs2(docName);
+                FontsOpsDoc.removeNoFont(d, fontName);
+                d.Save();
+                return d;
+            }
         }
 
 
@@ -56,7 +66,7 @@ namespace CharacterConverttoCharacterPics
         public int CharPicCounter { get => charPicCounter; }
 
         static List<powerPnt.Presentation> addCharsSlides(winWord.Document fontCharacterset,
-            powerPnt.Presentation ppt,int howManyCharsPPT=5000)
+            powerPnt.Presentation ppt, int howManyCharsPPT = 5000)
         {
             string X = ""; powerPnt.SlideRange sld;
             List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
@@ -89,8 +99,8 @@ namespace CharacterConverttoCharacterPics
                             btn.Text = "已處理" + charPicCounter + "個字";
                             btn.Parent.Refresh();
                         }
-                        
-                        if (charPicCounter % howManyCharsPPT ==0)
+
+                        if (charPicCounter % howManyCharsPPT == 0)
                         {//預設5000字一檔，以提升效率
                             ppt.Slides[2].Delete();//第2張是作樣本Duplicate()之依據，故用完即丟
                             warnings.playBeep();
@@ -116,7 +126,7 @@ namespace CharacterConverttoCharacterPics
             powerPnt.Presentation ppt, string exportDir, int howManyCharsPPT = 5000)
         {
             List<powerPnt.Presentation> ppts = addCharsSlides(
-                fontCharacterset, ppt,howManyCharsPPT);
+                fontCharacterset, ppt, howManyCharsPPT);
             int fontCharactersetCount = fontCharacterset.Range().Characters.Count;
             if (ppts.Count > 0)
             {
@@ -140,7 +150,7 @@ namespace CharacterConverttoCharacterPics
                 //ppt = null;//close()了就不用此行設為null了
             }
             if (App.PptAppOpenByCode)//若是PowerPoint是由程式開啟則關閉。會經過一段時間，或本應用程式結束後一段時間，才會關閉20210419
-                {App.AppPpt.Quit();App.AppPpt = null; }//然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
+            { App.AppPpt.Quit(); App.AppPpt = null; }//然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
             fontCharacterset.Close();
             if (App.DocAppOpenByCode) appDoc.Quit();
             appDoc = null;
