@@ -78,7 +78,7 @@ namespace CharacterConverttoCharacterPics
             if (wd != null)
             {
                 BackColor = Color.Red;
-                this.Enabled = false; button1.Enabled = false;
+                this.Enabled = false; button1.Enabled = false;this.Refresh();
                 string picFolder = textBox1.Text;
                 if (picFolder.IndexOf(fontname) == -1)
                 { picFolder += ("\\" + fontname + "\\"); }
