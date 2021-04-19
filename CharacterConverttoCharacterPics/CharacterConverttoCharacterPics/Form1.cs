@@ -1,15 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PowerPnt= Microsoft.Office.Interop.PowerPoint;
-using WinWord=Microsoft.Office.Interop.Word;
+using WinWord = Microsoft.Office.Interop.Word;
 
 
 
@@ -28,7 +20,7 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
             //if (ppnt==null||wwrd==null)
             //{
             //    MessageBox.Show("請開啟 Word 與 PowerPoint 再繼續");                
@@ -44,13 +36,28 @@ namespace CharacterConverttoCharacterPics
             //    }
             //    ppt = pptApp.ActivePresentation;
             //}
-            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (fontsPics.getFontCharacterset(textBox2.Text)!=null)
+            WinWord.Document wd = fontsPics.getFontCharacterset(textBox2.Text);
+            if (wd != null)
+            {
                 BackColor = Color.Red;
+                string picFolder = textBox1.Text,fontname= textBox2.Text;
+                if (picFolder.IndexOf(fontname)==-1)
+                { picFolder += ("\\" + fontname + "\\"); }
+                fontsPics.addCharsSlidesExportPng(wd,
+                    fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text))
+                    , picFolder);
+                BackColor = Color.Green;
+            }
+        }
+
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            textBox2.Text = Clipboard.GetText();
         }
     }
 }

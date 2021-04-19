@@ -1,6 +1,6 @@
-﻿using powerPnt=Microsoft.Office.Interop.PowerPoint;
-using winWord=Microsoft.Office.Interop.Word;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
+using powerPnt = Microsoft.Office.Interop.PowerPoint;
+using winWord = Microsoft.Office.Interop.Word;
 
 namespace CharacterConverttoCharacterPics
 {
@@ -8,47 +8,57 @@ namespace CharacterConverttoCharacterPics
     {
         //static winWord.Application appDoc;
         //static powerPnt.Application appPpt;
-        static object appOb;static string appClassName;
-        public App(app app)
-        {
-            //switch (app)
-            //{
-            //    case app.Word:
-            //        break;
-            //    case app.PowerPoint:
+        static object appOb; static string appClassName;
+        static bool pptAppOpenbyCode = false;
+        static bool docAppOpenbyCode = false;
+        //public App(app app)
+        //{
+        //    //switch (app)
+        //    //{
+        //    //    case app.Word:
+        //    //        break;
+        //    //    case app.PowerPoint:
 
-            //        break;
-            //    default:
-            //        break;
-            //}
-        }
+        //    //        break;
+        //    //    default:
+        //    //        break;
+        //    //}
+        //}
         public static winWord.Application AppDoc
         {
-            get {
+            get
+            {
                 appClassName = "Word.Application";
                 appOb = getApp(appClassName);
                 if (appOb == null)
                 {
+                    docAppOpenbyCode = true;
                     return new winWord.Application();
                 }
+                docAppOpenbyCode = false;
                 return (winWord.Application)appOb;
-            } 
+            }
         }
-            public static powerPnt.Application AppPpt
+        public static powerPnt.Application AppPpt
         {
-            get {
+            get
+            {
                 appClassName = "PowerPoint.Application";
                 appOb = getApp(appClassName);
                 if (appOb == null)
                 {
+                    pptAppOpenbyCode = true;//不如此則由程式啟動的powerpoint
+                                            //似乎無法以使用者手動關閉20210419
                     return new powerPnt.Application();
                 }
+                pptAppOpenbyCode = false;
                 return (powerPnt.Application)appOb;
-            } 
+            }
+            set { appOb = value; }
         }
-
-
-        static object getApp(string appClassName)
+        public static bool PptAppOpenByCode { get => pptAppOpenbyCode; }
+        public static bool DocAppOpenByCode { get => docAppOpenbyCode; }
+    static object getApp(string appClassName)
         {
             try
             {
@@ -62,7 +72,6 @@ namespace CharacterConverttoCharacterPics
 
         }
     }
-
     public enum app : byte
     {
         Word, PowerPoint

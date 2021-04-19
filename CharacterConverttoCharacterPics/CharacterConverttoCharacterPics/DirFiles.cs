@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using powerPnt = Microsoft.Office.Interop.PowerPoint;
 
 namespace CharacterConverttoCharacterPics
 {
@@ -35,6 +36,20 @@ namespace CharacterConverttoCharacterPics
         internal static string getDir各字型檔相關()
         {
             return getCjk_basic_IDS_UCS_Basic_txt().DirectoryName;
+        }
+
+        internal static powerPnt.Presentation get字圖母片pptm()
+        {
+            return App.AppPpt.Presentations.Open(
+                getDirRoot + "字圖母片.pptm");
+        }
+
+        internal static void getPicFolder(string picFolderPath)
+        {
+            if (Directory.Exists(picFolderPath)==false)
+            {
+                Directory.CreateDirectory(picFolderPath);
+            }
         }
     }
 }

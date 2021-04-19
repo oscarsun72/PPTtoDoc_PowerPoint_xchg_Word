@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Media;
 using winWord = Microsoft.Office.Interop.Word;
 
@@ -73,14 +72,15 @@ new List<string>{
 
         void FontsListView(winWord.Document ThisDocument)
         {
-            int fontCount,i=0; string x , xp="" ;
+            int fontCount, i = 0; string x, xp = "";
             fontCount = App.AppDoc.FontNames.Count;
             x = "\r\n" + ThisDocument.Paragraphs[1].Range.Text.Substring
-                (0, ThisDocument.Paragraphs[1].Range.Text.Length - 1);            
+                (0, ThisDocument.Paragraphs[1].Range.Text.Length - 1);
             for (int j = 2; j <= fontCount; j++)
                 xp += x;
-            ThisDocument.Range().InsertAfter(xp);            
-            foreach (string ft in App.AppDoc.FontNames) {
+            ThisDocument.Range().InsertAfter(xp);
+            foreach (string ft in App.AppDoc.FontNames)
+            {
                 i++;
                 ThisDocument.Paragraphs[i].Range.Font.Name = ft;
             }
