@@ -22,6 +22,13 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //textBox1.SpecialEffect Access才有此屬性：https://docs.microsoft.com/zh-tw/office/vba/api/access.textbox.specialeffect
+            //c# - 如何使RichTextBox外观平整？https://www.coder.work/article/953103
+            /*这确实是一种hack，但是您可以做的一件事是将Panel控件拖放到页面上。给它设置一个FixedSingle的BorderStyle(默认情况下为None)。
+                将RichTextBox放到面板中，并将BorderStyle设置为none。然后将RichTextBox的Dock属性设置为Fill。
+                这将为您提供带有扁平边框的RichTextBox。*/
+
+            //richTextBox1.t.sp
 
             //if (ppnt==null||wwrd==null)
             //{
