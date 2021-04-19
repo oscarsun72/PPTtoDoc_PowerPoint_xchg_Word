@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Media;
 using winWord = Microsoft.Office.Interop.Word;
 
@@ -9,8 +10,21 @@ namespace CharacterConverttoCharacterPics
 
         public static List<string> fontOkList
         {
-            get =>
-new List<string>{
+            
+            get { 
+                List<string> fontoklist = new List<string>();
+                StreamReader sr = new StreamReader(
+                    DirFiles.getFontOkList_txt().FullName);
+                string fontname;
+                while (!sr.EndOfStream) {
+                    fontname=sr.ReadLine();                    
+                    if (fontname!=""&& fontname.IndexOf("::") == -1)
+                        fontoklist.Add(fontname);
+                }
+                return fontoklist;
+            }
+            /*get =>
+            new List<string>{
                 "標楷體", "新細明體", "微軟正黑體", "新細明體 (本文中文字型)", "+本文中文字型"
                 , "細明體_HKSCS", "細明體", "細明體_HKSCS-ExtB", "細明體-ExtB",
                  "教育部隸書",
@@ -29,9 +43,10 @@ new List<string>{
                 "文鼎雕刻體B", "DFKinBun-W3",
                 "DFGFuun-W7",
 
-                "華康行書體(P)", "DFPFuun-W7", "DFGyoSho-W7" //華康行書體(P)以下為沒必要做的}
-};
-        }
+                "華康行書體(P)", "DFPFuun-W7", "DFGyoSho-W7" //華康行書體(P)以下為沒必要做的
+
+        };*/
+}
         internal static void removeNoFont(winWord.Document ThisDocument, string fontname)
         {
             foreach (winWord.Range a in ThisDocument.Characters)

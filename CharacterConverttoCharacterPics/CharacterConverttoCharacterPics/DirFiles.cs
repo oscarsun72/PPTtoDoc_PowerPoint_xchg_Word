@@ -33,6 +33,20 @@ namespace CharacterConverttoCharacterPics
                 return null;
         }
 
+        internal static FileInfo getFontOkList_txt()
+        {
+            DirectoryInfo dirRoot = new DirectoryInfo(getDirRoot);
+            IEnumerable<FileInfo> fileList = dirRoot.GetFiles
+                ("*.txt", SearchOption.AllDirectories);
+            IEnumerable<FileInfo> fileQuery =
+                from file in fileList
+                where file.Name.IndexOf("fontOkList.txt") > -1
+                select file;
+            if (fileQuery.Count() > 0)
+                return fileQuery.First();
+            else
+                return null;
+        }
         internal static string getDir各字型檔相關()
         {
             return getCjk_basic_IDS_UCS_Basic_txt().DirectoryName;

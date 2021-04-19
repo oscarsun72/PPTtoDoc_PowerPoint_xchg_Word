@@ -5,7 +5,7 @@ using System.IO;
 using System.Windows.Forms;
 using WinWord = Microsoft.Office.Interop.Word;
 using powerPnt = Microsoft.Office.Interop.PowerPoint;
-
+using System.Collections.Generic;
 
 namespace CharacterConverttoCharacterPics
 {
@@ -113,6 +113,9 @@ string dirPath = textBox1.Text;
         {
             switch (e.KeyCode)
             {
+                case Keys.T://test測試用
+                    List<string>ls= FontsOpsDoc.fontOkList;
+                    break;
                 case Keys.Escape:
                     this.Close();
                     break;
