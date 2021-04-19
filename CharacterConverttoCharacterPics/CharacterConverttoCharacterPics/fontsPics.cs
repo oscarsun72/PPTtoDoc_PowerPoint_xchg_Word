@@ -134,19 +134,25 @@ namespace CharacterConverttoCharacterPics
                 foreach (powerPnt.Presentation item in ppts)
                 {
                     pptSlidesCtr += (item.Slides.Count - 1);//每檔皆會有第一張空白投影片
-                    exportPng(item, exportDir,ppts.Count);//直接轉成字圖 20210419
+                    exportPng(item, exportDir, ppts.Count);//直接轉成字圖 20210419
                 }
 
                 if (++pptSlidesCtr != fontCharactersetCount)//投影片總數加1則與Word檔文字總數會包括最後一個分段符號吻合
+                {
+                    warnings.playSound();
                     MessageBox.Show("字數有所不同，請留意！", "注意：",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 DirFiles.openFolder(exportDir);
             }
             else//沒有分割（分別存）ppt檔的話
             {
                 if (fontCharactersetCount != ppt.Slides.Count) //若不分段，則Word後有一個chr(13)與此母片前多一張，正好抵消
+                {
+                    warnings.playSound();
                     MessageBox.Show("字數有所不同，請留意！", "注意：",
-                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                          MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
                 exportPng(ppt, exportDir);//字數一致，就直接轉成字圖 20210408
                 ppt.Close();//還是會自己關掉，要比較久而已 感恩感恩　南無阿彌陀佛 20210419
                 //ppt = null;//close()了就不用此行設為null了
