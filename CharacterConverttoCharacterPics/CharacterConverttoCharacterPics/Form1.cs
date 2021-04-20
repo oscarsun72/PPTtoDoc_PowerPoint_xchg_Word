@@ -53,7 +53,7 @@ namespace CharacterConverttoCharacterPics
             switch (e.KeyCode)
             {
                 case Keys.T://test測試用
-                    //warnings.playSound();
+                    
                     break;
                 case Keys.Escape:
                     this.Close();
@@ -72,6 +72,15 @@ namespace CharacterConverttoCharacterPics
 
         private void goFontsCharsToPics()
         {
+            string chDir = DirFiles.searchRootDirChange(textBox1.Text);
+            if (chDir == "")
+            {
+                MessageBox.Show("並無此目錄,請確認後再執行！","",
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                return;
+            }
+            else if (textBox1.Text != chDir) textBox1.Text = chDir;
+            
             BackColor = Color.Gray;
             this.Enabled = false; button1.Enabled = false;
             string fontname = textBox2.Text;
