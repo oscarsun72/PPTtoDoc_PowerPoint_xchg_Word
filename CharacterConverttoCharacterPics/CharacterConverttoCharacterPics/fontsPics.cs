@@ -68,58 +68,63 @@ namespace CharacterConverttoCharacterPics
         static List<powerPnt.Presentation> addCharsSlides(winWord.Document fontCharacterset,
             powerPnt.Presentation ppt, int howManyCharsPPT = 5000)
         {
-            string X = ""; powerPnt.SlideRange sld;
-            List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
-            string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
-            float fontsize = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.Size;
-            Button btn = (Button)Application.OpenForms[0].Controls["button1"];
-            //if f = "" Then Exit Sub
-            //If InStr(f, "?") Then
-            //    MsgBox "路徑中有亂碼，請檢查，或修改程式"
-            //    Exit Sub
-            //End If
-            //powerPnt.Presentation ppt = App.AppPpt.ActivePresentation;
-            foreach (winWord.Range an in fontCharacterset.Range().Characters)
-            {
-                //if (InStr(Chr(13) & Chr(7) & Chr(9) & Chr(8) & Chr(10) _
-                //        , a) = 0 Then
-                //https://dotblogs.com.tw/mis2000lab/2013/11/06/126917
-                //https://bbs.csdn.net/topics/90012123
-                if ("\r\n\t".IndexOf(an.Text) == -1)
-                {
-                    if (X.IndexOf(an.Text) == -1)
-                    {
-                        X += an.Text;
-                        sld = ppt.Slides[ppt.Slides.Count].Duplicate();
-                        sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
-                        charPicCounter++;
-                        if (charPicCounter % 500 == 0)
-                        { //https://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/operators/arithmetic-operators
-                            //fontCharacterset.Application.StatusBar = "已處理" + i + "個字";
-                            btn.Text = "已處理" + charPicCounter + "個字";
-                            btn.Parent.Refresh();
-                        }
+            using (Button btn = (Button)Application.OpenForms[0].Controls["button1"])            
+            {//https://bit.ly/3xbEGfH
+             //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
+                
+                string X = ""; powerPnt.SlideRange sld;
+                List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
+                string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
+                float fontsize = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.Size;
 
-                        if (charPicCounter % howManyCharsPPT == 0)
-                        {//預設5000字一檔，以提升效率
-                            ppt.Slides[2].Delete();//第2張是作樣本Duplicate()之依據，故用完即丟
-                            warnings.playBeep();
-                            ppt.Save();//準備分檔、準備下一檔
-                            returnPPTs.Add(ppt);
-                            //ppt.Close(); //存在List中後續要用，不能關掉
-                            //ppt.Windows[1].ViewType=好像也沒有隱藏功能，只好秀著
-                            ppt = prepareFontPPT(fontname,
-                                fontsize, fontname + "(不含缺字)" +
-                                (charPicCounter + 1).ToString() + "~.pptm");
+                //if f = "" Then Exit Sub
+                //If InStr(f, "?") Then
+                //    MsgBox "路徑中有亂碼，請檢查，或修改程式"
+                //    Exit Sub
+                //End If
+                //powerPnt.Presentation ppt = App.AppPpt.ActivePresentation;
+                foreach (winWord.Range an in fontCharacterset.Range().Characters)
+                {
+                    //if (InStr(Chr(13) & Chr(7) & Chr(9) & Chr(8) & Chr(10) _
+                    //        , a) = 0 Then
+                    //https://dotblogs.com.tw/mis2000lab/2013/11/06/126917
+                    //https://bbs.csdn.net/topics/90012123
+                    if ("\r\n\t".IndexOf(an.Text) == -1)
+                    {
+                        if (X.IndexOf(an.Text) == -1)
+                        {
+                            X += an.Text;
+                            sld = ppt.Slides[ppt.Slides.Count].Duplicate();
+                            sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
+                            charPicCounter++;
+                            if (charPicCounter % 500 == 0)
+                            { //https://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/operators/arithmetic-operators
+                              //fontCharacterset.Application.StatusBar = "已處理" + i + "個字";
+                                btn.Text = "已處理" + charPicCounter + "個字";
+                                btn.Refresh();//.Parent.Refresh();
+                            }
+
+                            if (charPicCounter % howManyCharsPPT == 0)
+                            {//預設5000字一檔，以提升效率
+                                ppt.Slides[2].Delete();//第2張是作樣本Duplicate()之依據，故用完即丟
+                                warnings.playBeep();
+                                ppt.Save();//準備分檔、準備下一檔
+                                returnPPTs.Add(ppt);
+                                //ppt.Close(); //存在List中後續要用，不能關掉
+                                //ppt.Windows[1].ViewType=好像也沒有隱藏功能，只好秀著
+                                ppt = prepareFontPPT(fontname,
+                                    fontsize, fontname + "(不含缺字)" +
+                                    (charPicCounter + 1).ToString() + "~.pptm");
+                            }
                         }
                     }
                 }
+                ppt.Slides[2].Delete();//第2張是作樣本Duplicate()之依據，故用完即丟
+                warnings.playBeep();
+                ppt.Save();//以免當掉
+                returnPPTs.Add(ppt);
+                return returnPPTs;
             }
-            ppt.Slides[2].Delete();//第2張是作樣本Duplicate()之依據，故用完即丟
-            warnings.playBeep();
-            ppt.Save();//以免當掉
-            returnPPTs.Add(ppt);
-            return returnPPTs;
         }
 
         internal static void addCharsSlidesExportPng(winWord.Document fontCharacterset,
@@ -142,7 +147,7 @@ namespace CharacterConverttoCharacterPics
                     warnings.playSound();
                     MessageBox.Show("字數有所不同，請留意！", "注意：",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                }
                 DirFiles.openFolder(exportDir);
             }
             else//沒有分割（分別存）ppt檔的話
@@ -184,7 +189,7 @@ namespace CharacterConverttoCharacterPics
             }
         }
 
-        
+
     }
 
 }
