@@ -9,20 +9,21 @@ namespace CharacterConverttoCharacterPics
     {
         public static List<string> fontOkList//這是製作字圖參考用的，表示是否需要做此字型之字圖
         {
-
             get
             {
-                List<string> fontoklist = new List<string>();
-                StreamReader sr = new StreamReader(
-                DirFiles.getFontOkList_txt().FullName);
-                string fontname;
-                while (!sr.EndOfStream)
+                using (StreamReader sr = new StreamReader(
+                DirFiles.getFontOkList_txt().FullName))
                 {
-                    fontname = sr.ReadLine();                    
-                    if (fontname != ""&& fontname.IndexOf("::")== -1)
-                        fontoklist.Add(fontname);
+                    List<string> fontoklist = new List<string>();
+                    string fontname;
+                    while (!sr.EndOfStream)
+                    {
+                        fontname = sr.ReadLine();
+                        if (fontname != "" && fontname.IndexOf("::") == -1)
+                            fontoklist.Add(fontname);
+                    }
+                    return fontoklist;
                 }
-                return fontoklist;
             }
         }
         public static List<string> fontPicsList//這是給執行插圖用的，表示真有此字型字圖
@@ -30,18 +31,20 @@ namespace CharacterConverttoCharacterPics
 
             get
             {
-                List<string> fontoklist = new List<string>();
-                StreamReader sr = new StreamReader(
-                DirFiles.getFontOkList_txt().FullName);
-                string fontname;
-                while (!sr.EndOfStream)
+                using (StreamReader sr = new StreamReader(
+                DirFiles.getFontOkList_txt().FullName))
                 {
-                    fontname = sr.ReadLine();
-                    if (fontname.IndexOf("::") > -1) break;//以「::」記號作為選取中止
-                    if (fontname != "")
-                        fontoklist.Add(fontname);
+                    string fontname;
+                    List<string> fontoklist = new List<string>();
+                    while (!sr.EndOfStream)
+                    {
+                        fontname = sr.ReadLine();
+                        if (fontname.IndexOf("::") > -1) break;//以「::」記號作為選取中止
+                        if (fontname != "")
+                            fontoklist.Add(fontname);
+                    }
+                    return fontoklist;
                 }
-                return fontoklist;
             }
             /*get =>
             new List<string>{
