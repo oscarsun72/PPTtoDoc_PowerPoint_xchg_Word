@@ -50,6 +50,7 @@ DFGKanTeiRyu-W11
 文鼎古印體B
 漢儀新蒂佛塔書
 漢儀新蒂牌樓體
+漢儀新蒂舘閣體
 
 文鼎雕刻體B
 DFKinBun-W3
