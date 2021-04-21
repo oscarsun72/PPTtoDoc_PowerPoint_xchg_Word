@@ -28,7 +28,6 @@ namespace CharacterConverttoCharacterPics
         }
         public static List<string> fontPicsList//這是給執行插圖用的，表示真有此字型字圖
         {
-
             get
             {
                 using (StreamReader sr = new StreamReader(
