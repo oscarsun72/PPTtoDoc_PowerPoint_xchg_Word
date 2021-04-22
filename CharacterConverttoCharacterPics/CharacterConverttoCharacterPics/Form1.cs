@@ -32,6 +32,7 @@ namespace CharacterConverttoCharacterPics
                         TextFrame.TextRange.Font.NameFarEast;
                     textBox3.Text = pptApp.ActivePresentation.Slides[2].Shapes[1].
                         TextFrame.TextRange.Font.Size.ToString();
+                    pptApp.Presentations["字圖母片.pptm"].Close();//不帶參數，不會問你存不存檔，直接不存檔就離開。故若有存檔需要，必須先儲存才行
                 }
             }
             if (App.PptAppOpenByCode)
