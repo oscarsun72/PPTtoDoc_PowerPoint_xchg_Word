@@ -102,7 +102,7 @@ namespace CharacterConverttoCharacterPics
                             { //https://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/operators/arithmetic-operators
                               //fontCharacterset.Application.StatusBar = "已處理" + i + "個字";
                                 btn.Text = "已處理" + charPicCounter + "個字";
-                                btn.Refresh();//.Parent.Refresh();
+                                btn.Parent.Refresh();//光是按鈕refresh則按鈕會消失不見
                             }
 
                             if (charPicCounter % howManyCharsPPT == 0)
