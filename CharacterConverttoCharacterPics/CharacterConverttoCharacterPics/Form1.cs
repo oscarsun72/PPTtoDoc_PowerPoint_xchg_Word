@@ -22,6 +22,19 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            powerPnt.Application pptApp = App.AppPpt;
+            if (pptApp.Presentations.Count > 0)
+            {
+                if (pptApp.ActivePresentation.Name == "字圖母片.pptm")
+                {
+                    //若字圖母片檔有打開，即設定好要轉字圖之字型規格，就將其字型名稱與大小載入相關的條件框中
+                    textBox2.Text = pptApp.ActivePresentation.Slides[2].Shapes[1].
+                        TextFrame.TextRange.Font.NameFarEast;
+                    textBox3.Text = pptApp.ActivePresentation.Slides[2].Shapes[1].
+                        TextFrame.TextRange.Font.Size.ToString();
+                }
+            }
+            pptApp = null;
             //textBox1.SpecialEffect Access才有此屬性：https://docs.microsoft.com/zh-tw/office/vba/api/access.textbox.specialeffect
             //c# - 如何使RichTextBox外观平整？https://www.coder.work/article/953103
             /*这确实是一种hack，但是您可以做的一件事是将Panel控件拖放到页面上。给它设置一个FixedSingle的BorderStyle(默认情况下为None)。
@@ -53,7 +66,7 @@ namespace CharacterConverttoCharacterPics
             switch (e.KeyCode)
             {
                 case Keys.T://test測試用
-                    
+
                     break;
                 case Keys.Escape:
                     this.Close();
@@ -75,12 +88,12 @@ namespace CharacterConverttoCharacterPics
             string chDir = DirFiles.searchRootDirChange(textBox1.Text);
             if (chDir == "")
             {
-                MessageBox.Show("並無此目錄,請確認後再執行！","",
-                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("並無此目錄,請確認後再執行！", "",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else if (textBox1.Text != chDir) textBox1.Text = chDir;
-            
+
             BackColor = Color.Gray;
             this.Enabled = false; button1.Enabled = false;
             string fontname = textBox2.Text;
@@ -111,7 +124,7 @@ namespace CharacterConverttoCharacterPics
         {
             if (FontsOpsDoc.fontOkList.Contains(textBox2.Text))
             {
-                MessageBox.Show("這個字型已經做過了！或是不必做的","請檢查！",
+                MessageBox.Show("這個字型已經做過了！或是不必做的", "請檢查！",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 button1.Enabled = false;
@@ -128,8 +141,8 @@ namespace CharacterConverttoCharacterPics
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-string dirPath = textBox1.Text;
-            if (Directory.Exists( dirPath))
+            string dirPath = textBox1.Text;
+            if (Directory.Exists(dirPath))
             {//開啟資料夾：
                 Process prc = new Process();
                 prc.StartInfo.FileName = dirPath;
@@ -137,6 +150,6 @@ string dirPath = textBox1.Text;
             }
         }
 
- 
+
     }
 }
