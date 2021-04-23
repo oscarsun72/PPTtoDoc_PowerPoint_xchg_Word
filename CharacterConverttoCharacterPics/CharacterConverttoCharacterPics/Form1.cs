@@ -10,6 +10,8 @@ namespace CharacterConverttoCharacterPics
 {
     public partial class Form1 : Form
     {
+        private bool fontsOK = false;
+
         //static PowerPnt.Application pptApp; 
         //static  WinWord.Application wdApp;
         //PowerPnt.Presentation ppt;
@@ -32,7 +34,8 @@ namespace CharacterConverttoCharacterPics
                         TextFrame.TextRange.Font.NameFarEast;
                     textBox3.Text = ppt.Slides[2].Shapes[1].
                         TextFrame.TextRange.Font.Size.ToString();
-                    ppt.Close();//不帶參數，不會問你存不存檔，直接不存檔就離開。故若有存檔需要，必須先儲存才行
+                    if (!fontsOK)
+                        ppt.Close();//不帶參數，不會問你存不存檔，直接不存檔就離開。故若有存檔需要，必須先儲存才行
                 }
                 else
                 {//如此則可以在一般投影片檢視下，先選擇想要的字型，再自己開啟字圖母片來訂製模板，以供程式參照製作20210423
@@ -131,12 +134,15 @@ namespace CharacterConverttoCharacterPics
         {
             if (FontsOpsDoc.fontOkList.Contains(textBox2.Text))
             {
+                fontsOK = true;
                 MessageBox.Show("這個字型已經做過了！或是不必做的", "請檢查！",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 button1.Enabled = false;
                 return;
             }
+            else
+                fontsOK = false;
             button1.Enabled = true;
         }
 
