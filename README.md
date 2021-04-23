@@ -9,7 +9,7 @@
 
 
 # 以下實作經驗記錄
-## 實作展示（[開發過程結果演示](https://youtu.be/1FS9TZ0tWRk)）：
+## 實作展示（[字型轉字圖開發過程結果演示](https://youtu.be/1FS9TZ0tWRk)）：
 餘記錄片詳本人頻道：[https://www.youtube.com/c/%E5%AD%AB%E5%AE%88%E7%9C%9F](https://www.youtube.com/c/%E5%AD%AB%E5%AE%88%E7%9C%9F)
 
 字型畢竟是要在本機電腦上安裝，才能正常顯示。若常在不同電腦間使用字型，又礙於可能對方電腦並不方便安裝字型，則不如將要展示的字型轉作字圖，來得方便、通用、跨平台，一了百了。
