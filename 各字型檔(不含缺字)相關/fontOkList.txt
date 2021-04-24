@@ -43,6 +43,9 @@ Adobe楷体StdR
 KaiTi
 文鼎標準楷體ProM
 
+華康歐陽詢體 Std W5
+華康歐陽詢體W5
+華康儷粗宋外字集
 文鼎顏楷H
 文鼎顏楷U
 文鼎毛楷B
@@ -57,10 +60,12 @@ DFGKanTeiRyu-W11
 文鼎古印體B
 漢儀新蒂佛塔書
 漢儀新蒂牌樓體
-
 文鼎雕刻體B
 DFKinBun-W3
 DFPGiHi-W7
+華康相撲體
+文鼎水管體B
+文鼎ＰＯＰ-２B
 
 DFGFuun-W7
 
