@@ -69,14 +69,7 @@ namespace CharacterConverttoCharacterPics
             {
                 Application.DoEvents();
 
-                powerPnt.Application pptApp = App.AppPpt;
-                foreach (powerPnt.Presentation ppt in pptApp.Presentations)
-                {
-                    if (ppt.Name == "字圖母片.pptm")
-                    {
-                        return ppt;
-                    }
-                }
+                powerPnt.Application pptApp = App.AppPpt;                
                 return pptApp.Presentations.Open(
                     getDirRoot + "字圖母片.pptm");                
             }
