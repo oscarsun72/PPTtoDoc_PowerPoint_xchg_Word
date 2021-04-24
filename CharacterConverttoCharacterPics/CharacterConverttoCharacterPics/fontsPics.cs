@@ -48,8 +48,8 @@ namespace CharacterConverttoCharacterPics
         }
 
 
-        internal static powerPnt.Presentation prepareFontPPT(string fontName, float
-            fontsize, string filenameSaveAs = "")
+        internal static powerPnt.Presentation prepareFontPPT(string fontName,
+            float fontsize, string filenameSaveAs = "")
         {
             if (filenameSaveAs == "") filenameSaveAs = fontName + "(不含缺字).pptm";
             DirFiles df = new DirFiles();

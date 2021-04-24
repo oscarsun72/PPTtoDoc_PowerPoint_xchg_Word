@@ -52,16 +52,35 @@ namespace CharacterConverttoCharacterPics
 
         internal powerPnt.Presentation get字圖母片pptm()
         {
-            powerPnt.Application pptApp = App.AppPpt;
-            foreach (powerPnt.Presentation ppt in pptApp.Presentations)
+            try
             {
-                if (ppt.Name == "字圖母片.pptm")
+                powerPnt.Application pptApp = App.AppPpt;
+                foreach (powerPnt.Presentation ppt in pptApp.Presentations)
                 {
-                    return ppt;
+                    if (ppt.Name == "字圖母片.pptm")
+                    {
+                        return ppt;
+                    }
                 }
+                return pptApp.Presentations.Open(
+                    getDirRoot + "字圖母片.pptm");
             }
-            return pptApp.Presentations.Open(
-                getDirRoot + "字圖母片.pptm");
+            catch (System.Exception)
+            {
+                Application.DoEvents();
+
+                powerPnt.Application pptApp = App.AppPpt;
+                foreach (powerPnt.Presentation ppt in pptApp.Presentations)
+                {
+                    if (ppt.Name == "字圖母片.pptm")
+                    {
+                        return ppt;
+                    }
+                }
+                return pptApp.Presentations.Open(
+                    getDirRoot + "字圖母片.pptm");                
+            }
+
         }
 
         internal static void getPicFolder(string picFolderPath)
