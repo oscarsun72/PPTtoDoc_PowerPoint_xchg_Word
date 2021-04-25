@@ -15,8 +15,9 @@ namespace CharacterConverttoCharacterPics
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            label1.Font = new Font(listBox1.SelectedItem.ToString(),
+            Font fnt= new Font(listBox1.SelectedItem.ToString(),
                 label1.Font.Size);
+            label1.Font = fnt; label2.Font = fnt;
         }
 
         private void Form2SelFont_Load(object sender, EventArgs e)
