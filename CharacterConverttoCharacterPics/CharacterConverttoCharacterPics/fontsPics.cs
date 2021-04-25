@@ -73,6 +73,7 @@ namespace CharacterConverttoCharacterPics
             {//https://bit.ly/3xbEGfH
              //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
                 btn.Parent.Refresh();
+                int charPicCounterOK=0;
                 string pptFullname = ppt.FullName;//為防止pptApp當掉重開而設
                 string X = ""; powerPnt.SlideRange sld;
                 List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
@@ -85,7 +86,11 @@ namespace CharacterConverttoCharacterPics
                 //    Exit Sub
                 //End If
                 //powerPnt.Presentation ppt = App.AppPpt.ActivePresentation;
-                foreach (winWord.Range an in fontCharacterset.Range().Characters)
+                //foreach (winWord.Range an in fontCharacterset.Range().Characters)
+                crashRedo:
+                winWord.Range rng = fontCharacterset.Range(fontCharacterset.Characters[charPicCounterOK+1]
+                    .Start, fontCharacterset.Range().End);
+                foreach (winWord.Range an in rng.Characters)
                 {
                     //if (InStr(Chr(13) & Chr(7) & Chr(9) & Chr(8) & Chr(10) _
                     //        , a) = 0 Then
@@ -106,8 +111,16 @@ namespace CharacterConverttoCharacterPics
                                 Application.DoEvents();//讓系統處理完pptApp當掉的程序
                                 App.AppPpt = null;
                                 ppt = App.AppPpt.Presentations.Open(pptFullname);
-                                sld = ppt.Slides[ppt.Slides.Count].Duplicate();
-                                sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
+                                if (ppt.Slides.Count==2)
+                                {
+                                    goto crashRedo;                                    
+                                }
+                                sld = ppt.Slides.Range(ppt.Slides.Count);
+                                if (sld.Shapes[1].TextFrame.TextRange.Text != an.Text)
+                                {
+                                    sld = ppt.Slides[ppt.Slides.Count].Duplicate();
+                                    sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
+                                }
                             }
                             charPicCounter++;
                             if (charPicCounter % 500 == 0)
@@ -122,6 +135,7 @@ namespace CharacterConverttoCharacterPics
                                 ppt.Slides[2].Delete();//第2張是作樣本Duplicate()之依據，故用完即丟
                                 warnings.playBeep();
                                 ppt.Save();//準備分檔、準備下一檔
+                                charPicCounterOK = charPicCounter;
                                 returnPPTs.Add(ppt);
                                 //ppt.Close(); //存在List中後續要用，不能關掉
                                 //ppt.Windows[1].ViewType=好像也沒有隱藏功能，只好秀著
