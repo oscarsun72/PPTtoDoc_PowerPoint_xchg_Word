@@ -148,6 +148,7 @@ namespace CharacterConverttoCharacterPics
         {
             if (e.Button == MouseButtons.Right)
             {
+                BackColor = Color.DarkOrange;
                 Form2SelFont f2 = new Form2SelFont();
                 f2.Show();
                 //C# 取消滑鼠事件 handled: https://docs.microsoft.com/zh-tw/dotnet/api/system.windows.forms.handledmouseeventargs?view=net-5.0
@@ -173,6 +174,7 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_Activated(object sender, EventArgs e)
         {
+            App.AppPpt = null;
             powerPnt.Application pptApp = App.AppPpt;
             if (pptApp.Presentations.Count > 0)
             {
