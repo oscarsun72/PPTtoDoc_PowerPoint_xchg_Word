@@ -75,7 +75,7 @@ namespace CharacterConverttoCharacterPics
                 btn.Parent.Refresh();
                 int charPicCounterOK=0;
                 string pptFullname = ppt.FullName;//為防止pptApp當掉重開而設
-                string X = ""; powerPnt.SlideRange sld;
+                string Xpicsok = ""; powerPnt.SlideRange sld;
                 List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
                 string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
                 float fontsize = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.Size;
@@ -98,9 +98,9 @@ namespace CharacterConverttoCharacterPics
                     //https://bbs.csdn.net/topics/90012123
                     if ("\r\n\t".IndexOf(an.Text) == -1)
                     {
-                        if (X.IndexOf(an.Text) == -1)
+                        if (Xpicsok.IndexOf(an.Text) == -1)
                         {
-                            X += an.Text;
+                            Xpicsok += an.Text;
                             try
                             {
                                 sld = ppt.Slides[ppt.Slides.Count].Duplicate();
@@ -113,6 +113,7 @@ namespace CharacterConverttoCharacterPics
                                 ppt = App.AppPpt.Presentations.Open(pptFullname);
                                 if (ppt.Slides.Count==2)
                                 {
+                                    charPicCounter = 0;Xpicsok = "";
                                     goto crashRedo;                                    
                                 }
                                 sld = ppt.Slides.Range(ppt.Slides.Count);
