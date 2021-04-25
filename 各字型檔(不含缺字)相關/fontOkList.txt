@@ -125,3 +125,9 @@ Yu Gothic UI Semibold
 Yu Gothic UI Semilight
 微軟正黑體 Light
 新細明體-ExtB
+Adobe Gothic Std B
+Adobe Myungjo Std M
+Adobe 仿宋 Std R
+Adobe 宋体 Std L
+Adobe 明體 Std L
+Adobe 黑体 Std R
