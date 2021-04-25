@@ -48,8 +48,8 @@ namespace CharacterConverttoCharacterPics
         }
 
 
-        internal static powerPnt.Presentation prepareFontPPT(string fontName, float
-            fontsize, string filenameSaveAs = "")
+        internal static powerPnt.Presentation prepareFontPPT(string fontName,
+            float fontsize, string filenameSaveAs = "")
         {
             if (filenameSaveAs == "") filenameSaveAs = fontName + "(不含缺字).pptm";
             DirFiles df = new DirFiles();
@@ -72,7 +72,8 @@ namespace CharacterConverttoCharacterPics
             using (Button btn = (Button)Application.OpenForms[0].Controls["button1"])
             {//https://bit.ly/3xbEGfH
              //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
-
+                btn.Parent.Refresh();
+                string pptFullname = ppt.FullName;//為防止pptApp當掉重開而設
                 string X = ""; powerPnt.SlideRange sld;
                 List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
                 string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
@@ -95,8 +96,19 @@ namespace CharacterConverttoCharacterPics
                         if (X.IndexOf(an.Text) == -1)
                         {
                             X += an.Text;
-                            sld = ppt.Slides[ppt.Slides.Count].Duplicate();
-                            sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
+                            try
+                            {
+                                sld = ppt.Slides[ppt.Slides.Count].Duplicate();
+                                sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
+                            }
+                            catch (System.Exception)
+                            {
+                                Application.DoEvents();//讓系統處理完pptApp當掉的程序
+                                App.AppPpt = null;
+                                ppt = App.AppPpt.Presentations.Open(pptFullname);
+                                sld = ppt.Slides[ppt.Slides.Count].Duplicate();
+                                sld.Shapes[1].TextFrame.TextRange.Text = an.Text;
+                            }
                             charPicCounter++;
                             if (charPicCounter % 500 == 0)
                             { //https://docs.microsoft.com/zh-tw/dotnet/csharp/language-reference/operators/arithmetic-operators
@@ -146,6 +158,7 @@ namespace CharacterConverttoCharacterPics
                 if (++pptSlidesCtr != fontCharactersetCount)//投影片總數加1則與Word檔文字總數會包括最後一個分段符號吻合
                 {
                     warnings.playSound();
+                    //btn.Parent.Refresh();
                     MessageBox.Show("字數有所不同，請留意！", "注意：",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
@@ -156,6 +169,7 @@ namespace CharacterConverttoCharacterPics
                 if (fontCharactersetCount != ppt.Slides.Count) //若不分段，則Word後有一個chr(13)與此母片前多一張，正好抵消
                 {
                     warnings.playSound();
+                    //btn.Parent.Refresh();
                     MessageBox.Show("字數有所不同，請留意！", "注意：",
                           MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }

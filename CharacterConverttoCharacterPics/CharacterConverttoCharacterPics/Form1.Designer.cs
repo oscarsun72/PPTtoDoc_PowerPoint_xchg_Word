@@ -65,7 +65,7 @@ namespace CharacterConverttoCharacterPics
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(21, 95);
+            this.textBox2.Location = new System.Drawing.Point(21, 96);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(158, 22);
             this.textBox2.TabIndex = 2;
@@ -78,7 +78,7 @@ namespace CharacterConverttoCharacterPics
             this.button1.Location = new System.Drawing.Point(71, 137);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(299, 38);
-            this.button1.TabIndex = 3;
+            this.button1.TabIndex = 4;
             this.button1.Text = "字型轉字圖";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -88,7 +88,7 @@ namespace CharacterConverttoCharacterPics
             this.textBox3.Location = new System.Drawing.Point(198, 95);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 4;
+            this.textBox3.TabIndex = 3;
             this.textBox3.Text = "450";
             // 
             // label2
@@ -133,7 +133,8 @@ namespace CharacterConverttoCharacterPics
             this.textBox4.Location = new System.Drawing.Point(312, 96);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 8;
+            this.textBox4.TabIndex = 4;
+            this.textBox4.TabStop = false;
             this.textBox4.Text = "5000";
             // 
             // richTextBox1
