@@ -198,5 +198,11 @@ namespace CharacterConverttoCharacterPics
             if (App.PptAppOpenByCode)
                 pptApp.Quit();pptApp = null;
         }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            //fontOKList中有而還要做此字型時（如遇當掉時須重作者）
+            button1.Enabled = true;
+        }
     }
 }
