@@ -104,6 +104,7 @@ namespace CharacterConverttoCharacterPics
                             catch (System.Exception)
                             {
                                 Application.DoEvents();//讓系統處理完pptApp當掉的程序
+                                App.AppPpt = null;
                                 ppt = App.AppPpt.Presentations.Open(pptFullname);
                                 sld = ppt.Slides[ppt.Slides.Count].Duplicate();
                                 sld.Shapes[1].TextFrame.TextRange.Text = an.Text;

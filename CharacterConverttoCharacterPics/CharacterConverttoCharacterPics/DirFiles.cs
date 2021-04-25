@@ -68,9 +68,8 @@ namespace CharacterConverttoCharacterPics
             catch (System.Exception)
             {
                 Application.DoEvents();
-
-                powerPnt.Application pptApp = App.AppPpt;                
-                return pptApp.Presentations.Open(
+                App.AppPpt = null;                                
+                return App.AppPpt.Presentations.Open(
                     getDirRoot + "字圖母片.pptm");                
             }
 
