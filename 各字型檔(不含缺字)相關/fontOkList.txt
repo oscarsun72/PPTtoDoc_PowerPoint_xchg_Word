@@ -131,3 +131,11 @@ Adobe 仿宋 Std R
 Adobe 宋体 Std L
 Adobe 明體 Std L
 Adobe 黑体 Std R
+Adobe 楷体 Std R
+Adobe 繁黑體 Std B
+Arial Unicode MS
+Batang
+BatangChe
+CSongGB18030C-Light
+CSongGB18030C-LightHWL
+DFFangSongW3-A
