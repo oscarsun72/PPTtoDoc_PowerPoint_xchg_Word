@@ -52,8 +52,9 @@ namespace CharacterConverttoCharacterPics
             float fontsize, string filenameSaveAs = "")
         {
             if (filenameSaveAs == "") filenameSaveAs = fontName + "(不含缺字).pptm";
-            DirFiles df = new DirFiles();
-            powerPnt.Presentation ppt = df.get字圖母片pptm();
+            //DirFiles df = new DirFiles();
+            //powerPnt.Presentation ppt = df.get字圖母片pptm();
+            powerPnt.Presentation ppt = DirFiles.get字圖母片pptm();
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast =
                 fontName;
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.Size = fontsize;

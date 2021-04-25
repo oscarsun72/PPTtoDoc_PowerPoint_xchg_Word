@@ -46,6 +46,7 @@ namespace CharacterConverttoCharacterPics
                 }
                 return appDoc;
             }
+            set { AppDoc= value; appOb = value; }
         }
         public static powerPnt.Application AppPpt
         {

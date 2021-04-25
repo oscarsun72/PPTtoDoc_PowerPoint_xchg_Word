@@ -23,6 +23,7 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //App.AppPpt = null;
             powerPnt.Application pptApp = App.AppPpt;
             if (pptApp.Presentations.Count > 0)
             {
@@ -164,6 +165,31 @@ namespace CharacterConverttoCharacterPics
             }
         }
 
+        private void textBox2_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                Form2SelFont f2 = new Form2SelFont();
+                f2.Show();
+                //C# 取消滑鼠事件 handled: https://docs.microsoft.com/zh-tw/dotnet/api/system.windows.forms.handledmouseeventargs?view=net-5.0
+                //未成功，再研究20210425
+                new HandledMouseEventArgs(
+                    e.Button, e.Clicks, e.X, e.Y, e.Delta)
+                {
+                    Handled = true
+                };
+            }
+        }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (App.AppPpt != null)
+            {
+                try
+                { App.AppPpt.Quit(); }
+                catch
+                { App.AppPpt = null; }
+            }
+        }
     }
 }

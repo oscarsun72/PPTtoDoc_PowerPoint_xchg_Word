@@ -17,6 +17,7 @@ DFPGyoSho-W7
 
 文鼎魏碑B
 文鼎行楷碑體B
+漢儀新蒂永樂大典
 Hanyi Senty Floral Calligraphy
 Hanyi Senty Lingfei Scroll
 漢儀新蒂語文體
@@ -91,3 +92,36 @@ DFGyoSho-W7
 
 ::以下為抓不到的
 Hanyi Senty Triumph Calligraph
+
+
+::以下判斷後由程式加入
+HanaMinA
+HanaMinB
+Malgun Gothic
+Malgun Gothic Semilight
+Microsoft JhengHei UI
+Microsoft JhengHei UI Light
+Microsoft YaHei
+Microsoft YaHei Light
+Microsoft YaHei UI
+Microsoft YaHei UI Light
+MS Gothic
+MS PGothic
+MS UI Gothic
+NSimSun
+sim-ch_n5100
+SimSun
+SimSun-ExtB
+TH-Tshyn-P0
+TH-Tshyn-P1
+TH-Tshyn-P16
+TH-Tshyn-P2
+Yu Gothic
+Yu Gothic Light
+Yu Gothic Medium
+Yu Gothic UI
+Yu Gothic UI Light
+Yu Gothic UI Semibold
+Yu Gothic UI Semilight
+微軟正黑體 Light
+新細明體-ExtB

@@ -7,6 +7,28 @@ namespace CharacterConverttoCharacterPics
 {
     public class FontsOpsDoc
     {
+        public static List<string> docFontNames{
+            get
+            {
+                winWord.Application docapp; 
+                try
+                {
+                    docapp=App.AppDoc;
+                }
+                catch (System.Exception)
+                {
+                    App.AppDoc = null;
+                    docapp = App.AppDoc;
+                }
+                List<string> ls = new List<string>();
+                foreach (var item in docapp.FontNames)
+                {
+                    ls.Add(item.ToString());
+                }
+                return ls;
+            }
+                
+        }
         public static List<string> fontOkList//這是製作字圖參考用的，表示是否需要做此字型之字圖
         {
             get

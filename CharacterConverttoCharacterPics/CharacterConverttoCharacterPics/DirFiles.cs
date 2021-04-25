@@ -31,6 +31,22 @@ namespace CharacterConverttoCharacterPics
                 return null;
         }
 
+        internal static async void appendFontOkList_txt(List<string> appendTextList,
+            List<string>fontoklist)
+        {//https://docs.microsoft.com/zh-tw/dotnet/csharp/programming-guide/file-system/how-to-write-to-a-text-file
+            using (StreamWriter file = new StreamWriter
+                (getFontOkList_txt().FullName, append: true))
+            {                
+                foreach (string item in appendTextList)
+                {
+                    if (!fontoklist.Contains(item))
+                    {
+                        await file.WriteLineAsync(item);
+                    }
+                }
+            }
+        }
+
         internal static FileInfo getFontOkList_txt()
         {
             DirectoryInfo dirRoot = new DirectoryInfo(getDirRoot);
@@ -50,7 +66,8 @@ namespace CharacterConverttoCharacterPics
             return getCjk_basic_IDS_UCS_Basic_txt().DirectoryName;
         }
 
-        internal powerPnt.Presentation get字圖母片pptm()
+        //internal powerPnt.Presentation get字圖母片pptm()
+        internal static powerPnt.Presentation get字圖母片pptm()
         {
             try
             {
@@ -68,9 +85,9 @@ namespace CharacterConverttoCharacterPics
             catch (System.Exception)
             {
                 Application.DoEvents();
-                App.AppPpt = null;                                
+                App.AppPpt = null;
                 return App.AppPpt.Presentations.Open(
-                    getDirRoot + "字圖母片.pptm");                
+                    getDirRoot + "字圖母片.pptm");
             }
 
         }
