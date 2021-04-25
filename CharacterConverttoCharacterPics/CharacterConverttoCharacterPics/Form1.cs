@@ -23,29 +23,8 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //App.AppPpt = null;
-            powerPnt.Application pptApp = App.AppPpt;
-            if (pptApp.Presentations.Count > 0)
-            {
-                powerPnt.Presentation ppt = pptApp.ActivePresentation;
-                if (ppt.Name == "字圖母片.pptm")
-                {
-                    //若字圖母片檔有打開，即設定好要轉字圖之字型規格，就將其字型名稱與大小載入相關的條件框中
-                    textBox2.Text = ppt.Slides[2].Shapes[1].
-                        TextFrame.TextRange.Font.NameFarEast;
-                    textBox3.Text = ppt.Slides[2].Shapes[1].
-                        TextFrame.TextRange.Font.Size.ToString();
-                    if (!fontsOK)
-                        ppt.Close();//不帶參數，不會問你存不存檔，直接不存檔就離開。故若有存檔需要，必須先儲存才行
-                }
-                else
-                {//如此則可以在一般投影片檢視下，先選擇想要的字型，再自己開啟字圖母片來訂製模板，以供程式參照製作20210423
-                    textBox2.Text = ppt.Slides[2].Shapes[1].
-                        TextFrame.TextRange.Font.NameFarEast;
-                }
-            }
-            if (App.PptAppOpenByCode)
-                pptApp.Quit();
+            
+            
             //textBox1.SpecialEffect Access才有此屬性：https://docs.microsoft.com/zh-tw/office/vba/api/access.textbox.specialeffect
             //c# - 如何使RichTextBox外观平整？https://www.coder.work/article/953103
             /*这确实是一种hack，但是您可以做的一件事是将Panel控件拖放到页面上。给它设置一个FixedSingle的BorderStyle(默认情况下为None)。
@@ -183,13 +162,39 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (App.AppPpt != null)
+            if (App.AppPpt != null&& App.PptAppOpenByCode==true)
             {
                 try
                 { App.AppPpt.Quit(); }
                 catch
                 { App.AppPpt = null; }
             }
+        }
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            powerPnt.Application pptApp = App.AppPpt;
+            if (pptApp.Presentations.Count > 0)
+            {
+                powerPnt.Presentation ppt = pptApp.ActivePresentation;
+                if (ppt.Name == "字圖母片.pptm")
+                {
+                    //若字圖母片檔有打開，即設定好要轉字圖之字型規格，就將其字型名稱與大小載入相關的條件框中
+                    textBox2.Text = ppt.Slides[2].Shapes[1].
+                        TextFrame.TextRange.Font.NameFarEast;
+                    textBox3.Text = ppt.Slides[2].Shapes[1].
+                        TextFrame.TextRange.Font.Size.ToString();
+                    if (!fontsOK)
+                        ppt.Close();//不帶參數，不會問你存不存檔，直接不存檔就離開。故若有存檔需要，必須先儲存才行
+                }
+                else
+                {//如此則可以在一般投影片檢視下，先選擇想要的字型，再自己開啟字圖母片來訂製模板，以供程式參照製作20210423
+                    textBox2.Text = ppt.Slides[2].Shapes[1].
+                        TextFrame.TextRange.Font.NameFarEast;
+                }
+            }
+            if (App.PptAppOpenByCode)
+                pptApp.Quit();pptApp = null;
         }
     }
 }

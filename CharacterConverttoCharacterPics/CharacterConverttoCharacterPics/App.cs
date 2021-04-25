@@ -71,8 +71,8 @@ namespace CharacterConverttoCharacterPics
             }
             set { appOb = value;appPpt = value; }
         }
-        public static bool PptAppOpenByCode { get => pptAppOpenbyCode; }
-        public static bool DocAppOpenByCode { get => docAppOpenbyCode; }
+        public static bool PptAppOpenByCode { get => pptAppOpenbyCode; set => pptAppOpenbyCode=value; }
+        public static bool DocAppOpenByCode { get => docAppOpenbyCode; set => pptAppOpenbyCode = value; }
         static object getApp(string appClassName)
         {
             try

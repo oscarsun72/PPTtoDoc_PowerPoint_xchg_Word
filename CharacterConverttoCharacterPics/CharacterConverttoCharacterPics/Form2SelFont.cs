@@ -46,6 +46,7 @@ namespace CharacterConverttoCharacterPics
         private void selectFontWanted()
         {
             powerPnt.Presentation ppt = DirFiles.get字圖母片pptm();
+            //App.PptAppOpenByCode = false;
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast =
                 FontNameWanted;
             ppt.Slides[2].Select();
@@ -59,7 +60,7 @@ namespace CharacterConverttoCharacterPics
             DirFiles.appendFontOkList_txt(ls, FontsOpsDoc.fontOkList);
             //Application.OpenForms["Form1"].Controls["textBox2"].Text =
             //    listBox1.SelectedItem.ToString();
-            Close();
+            Close();            
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
