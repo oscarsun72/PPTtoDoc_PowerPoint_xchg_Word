@@ -59,6 +59,7 @@ KaiTi
 文鼎毛楷H
 
 DFMinchoP-W5
+DFGMinchoP-W5
 
 DFGothicP-W5
 
@@ -68,6 +69,7 @@ DFGKanTeiRyu-W11
 漢儀新蒂牌樓體
 文鼎雕刻體B
 DFKinBun-W3
+DFGKinBun-W3
 DFPGiHi-W7
 華康相撲體
 文鼎水管體B
@@ -391,5 +393,5 @@ DengXian
 DengXian Light
 DFGGiHi-W7
 DFGGothicP-W5
-DFGKinBun-W3
 DFGMaruGothic-Md
+DFGMinchoP-W5
