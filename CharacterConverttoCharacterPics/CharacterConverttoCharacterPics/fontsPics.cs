@@ -74,13 +74,13 @@ namespace CharacterConverttoCharacterPics
             {//https://bit.ly/3xbEGfH
              //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
                 btn.Parent.Refresh();
-                int charPicCounterOK=0;
+                int charPicCounterOK = 0;
                 string pptFullname;
-                try{ pptFullname = ppt.FullName;//為防止pptApp當掉重開而設
-                }
-                catch{
-                    App.appPpt=null;
-                    ppt= App.appPpt.ActivePresentation;
+                try { pptFullname = ppt.FullName; }//為防止pptApp當掉重開而設                
+                catch
+                {
+                    App.AppPpt = null;
+                    ppt = App.AppPpt.ActivePresentation;
                     pptFullname = ppt.FullName;
                 }
                 string Xpicsok = ""; powerPnt.SlideRange sld;
@@ -88,15 +88,15 @@ namespace CharacterConverttoCharacterPics
                 string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
                 float fontsize = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.Size;
 
-                //if f = "" Then Exit Sub
-                //If InStr(f, "?") Then
-                //    MsgBox "路徑中有亂碼，請檢查，或修改程式"
-                //    Exit Sub
-                //End If
-                //powerPnt.Presentation ppt = App.AppPpt.ActivePresentation;
-                //foreach (winWord.Range an in fontCharacterset.Range().Characters)
-                crashRedo:
-                winWord.Range rng = fontCharacterset.Range(fontCharacterset.Characters[charPicCounterOK+1]
+            //if f = "" Then Exit Sub
+            //If InStr(f, "?") Then
+            //    MsgBox "路徑中有亂碼，請檢查，或修改程式"
+            //    Exit Sub
+            //End If
+            //powerPnt.Presentation ppt = App.AppPpt.ActivePresentation;
+            //foreach (winWord.Range an in fontCharacterset.Range().Characters)
+            crashRedo:
+                winWord.Range rng = fontCharacterset.Range(fontCharacterset.Characters[charPicCounterOK + 1]
                     .Start, fontCharacterset.Range().End);
                 foreach (winWord.Range an in rng.Characters)
                 {
@@ -119,10 +119,10 @@ namespace CharacterConverttoCharacterPics
                                 Application.DoEvents();//讓系統處理完pptApp當掉的程序
                                 App.AppPpt = null;
                                 ppt = App.AppPpt.Presentations.Open(pptFullname);
-                                if (ppt.Slides.Count==2)
+                                if (ppt.Slides.Count == 2)
                                 {
-                                    charPicCounter = 0;Xpicsok = "";
-                                    goto crashRedo;                                    
+                                    charPicCounter = 0; Xpicsok = "";
+                                    goto crashRedo;
                                 }
                                 sld = ppt.Slides.Range(ppt.Slides.Count);
                                 if (sld.Shapes[1].TextFrame.TextRange.Text != an.Text)
