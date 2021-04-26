@@ -75,6 +75,7 @@ DFPGiHi-W7
 文鼎水管體B
 文鼎石頭體EB
 文鼎ＰＯＰ-２B
+Hanyi Senty Chalk Original
 
 @Yu Gothic UI Semibold
 
@@ -391,7 +392,7 @@ ZWAdobeF
 @標楷體
 DengXian
 DengXian Light
-DFGGiHi-W7
 DFGGothicP-W5
 DFGMaruGothic-Md
 DFGMinchoP-W5
+DFGOYoJun-W5

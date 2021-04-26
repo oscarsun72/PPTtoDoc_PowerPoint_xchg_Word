@@ -68,21 +68,14 @@ namespace CharacterConverttoCharacterPics
         public int CharPicCounter { get => charPicCounter; }
 
         static List<powerPnt.Presentation> addCharsSlides(winWord.Document fontCharacterset,
-            powerPnt.Presentation ppt, int howManyCharsPPT = 5000)
+            powerPnt.Presentation ppt, string pptFullname
+            , int howManyCharsPPT = 5000)
         {
             using (Button btn = (Button)Application.OpenForms[0].Controls["button1"])
             {//https://bit.ly/3xbEGfH
              //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
                 btn.Parent.Refresh();
-                int charPicCounterOK = 0;
-                string pptFullname;
-                try { pptFullname = ppt.FullName; }//為防止pptApp當掉重開而設                
-                catch
-                {
-                    App.AppPpt = null;
-                    ppt = App.AppPpt.ActivePresentation;
-                    pptFullname = ppt.FullName;
-                }
+                int charPicCounterOK = 0;                                
                 string Xpicsok = ""; powerPnt.SlideRange sld;
                 List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
                 string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
@@ -167,7 +160,7 @@ namespace CharacterConverttoCharacterPics
             powerPnt.Presentation ppt, string exportDir, int howManyCharsPPT = 5000)
         {
             List<powerPnt.Presentation> ppts = addCharsSlides(
-                fontCharacterset, ppt, howManyCharsPPT);
+                fontCharacterset, ppt,ppt.FullName, howManyCharsPPT);
             int fontCharactersetCount = fontCharacterset.Range().Characters.Count;
             if (ppts.Count > 0)
             {
