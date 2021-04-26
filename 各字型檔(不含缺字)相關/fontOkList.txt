@@ -21,6 +21,7 @@ DFGGiHi-W7
 DFGiHi-W7
 漢儀新蒂永樂大典
 HanyiSentyZhao
+漢儀新蒂張即之體
 Hanyi Senty Floral Calligraphy
 Hanyi Senty Lingfei Scroll
 漢儀新蒂語文體
@@ -67,6 +68,7 @@ DFGKanTeiRyu-W11
 漢儀新蒂牌樓體
 文鼎雕刻體B
 DFKinBun-W3
+DFGKinBun-W3
 DFPGiHi-W7
 華康相撲體
 文鼎水管體B
@@ -100,6 +102,8 @@ DFGyoSho-W7
 
 ::以下為抓不到的
 Hanyi Senty Triumph Calligraph
+::Word可以，PowerPoint抓不到
+Hanyi Senty Candy
 
 
 ::以下判斷後由程式加入
@@ -388,5 +392,4 @@ DengXian
 DengXian Light
 DFGGiHi-W7
 DFGGothicP-W5
-DFGKinBun-W3
 DFGMaruGothic-Md
