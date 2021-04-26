@@ -17,6 +17,7 @@ DFPGyoSho-W7
 
 文鼎魏碑B
 文鼎行楷碑體B
+DFGOYoJun-W5
 DFGGiHi-W7
 DFGiHi-W7
 漢儀新蒂永樂大典
@@ -392,7 +393,6 @@ ZWAdobeF
 @標楷體
 DengXian
 DengXian Light
-DFGGiHi-W7
 DFGGothicP-W5
 DFGMaruGothic-Md
 DFGMinchoP-W5
