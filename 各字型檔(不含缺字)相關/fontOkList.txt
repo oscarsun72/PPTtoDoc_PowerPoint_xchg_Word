@@ -388,3 +388,5 @@ DengXian
 DengXian Light
 DFGGiHi-W7
 DFGGothicP-W5
+DFGKinBun-W3
+DFGMaruGothic-Md
