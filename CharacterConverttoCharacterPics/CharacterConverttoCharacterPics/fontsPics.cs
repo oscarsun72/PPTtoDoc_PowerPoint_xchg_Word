@@ -75,7 +75,14 @@ namespace CharacterConverttoCharacterPics
              //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
                 btn.Parent.Refresh();
                 int charPicCounterOK=0;
-                string pptFullname = ppt.FullName;//為防止pptApp當掉重開而設
+                string pptFullname;
+                try{ pptFullname = ppt.FullName;//為防止pptApp當掉重開而設
+                }
+                catch{
+                    App.appPpt=null;
+                    ppt= App.appPpt.ActivePresentation;
+                    pptFullname = ppt.FullName;
+                }
                 string Xpicsok = ""; powerPnt.SlideRange sld;
                 List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
                 string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
