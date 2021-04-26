@@ -71,7 +71,7 @@ DFPGiHi-W7
 文鼎石頭體EB
 文鼎ＰＯＰ-２B
 
-
+@Yu Gothic UI Semibold
 
 DFGFuun-W7
 DFFuun-W7
@@ -349,3 +349,40 @@ ZWAdobeF
 @Yu Gothic Medium
 @Yu Gothic UI
 @Yu Gothic UI Light
+@Yu Gothic UI Semilight
+@文鼎毛楷B
+@文鼎毛楷EB
+@文鼎毛楷H
+@文鼎古印體B
+@文鼎仿宋B
+@文鼎仿宋L
+@文鼎仿宋M
+@文鼎行楷碑體B
+@文鼎標準楷體ProM
+@文鼎鋼筆行楷M
+@文鼎雕刻體B
+@文鼎隸書B
+@文鼎隸書DB
+@文鼎隸書M
+@文鼎顏楷H
+@文鼎顏楷U
+@文鼎魏碑B
+@教育部標準宋體UN
+@教育部標準楷書
+@教育部隸書
+@細明體
+@細明體_HKSCS
+@細明體_HKSCS-ExtB
+@細明體-ExtB
+@華康行書體
+@華康行書體(P)
+@微軟正黑體
+@微軟正黑體 Light
+@新細明體
+@新細明體-ExtB
+@漢儀新蒂永樂大典
+@標楷體
+DengXian
+DengXian Light
+DFGGiHi-W7
+DFGGothicP-W5
