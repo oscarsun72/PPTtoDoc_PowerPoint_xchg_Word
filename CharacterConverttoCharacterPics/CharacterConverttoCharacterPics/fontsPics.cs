@@ -71,7 +71,9 @@ namespace CharacterConverttoCharacterPics
             powerPnt.Presentation ppt, string pptFullname
             , int howManyCharsPPT = 5000)
         {
-            using (Button btn = (Button)Application.OpenForms[0].Controls["button1"])
+            //不用using，是怕離開using後 btn 被 dispose 而連帶的Form1上的button1也會消失。若真如此，可見下行乃指針或參考指令，非複製原物件為副本之指令也20210427
+            //using (Button btn = (Button)Application.OpenForms[0].Controls["button1"])
+            Button btn = (Button)Application.OpenForms[0].Controls["button1"];
             {//https://bit.ly/3xbEGfH
              //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
                 btn.Parent.Refresh();
@@ -175,8 +177,10 @@ namespace CharacterConverttoCharacterPics
                 {
                     warnings.playSound();
                     //btn.Parent.Refresh();
-                    MessageBox.Show("字數有所不同，請留意！", "注意：",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Button btn = (Button)Application.OpenForms[0].Controls["button1"];
+                    btn.Text = "字數有所不同，請留意！";
+                    btn.Parent.BackColor = Color.BurlyWood;//MessageBox.Show("字數有所不同，請留意！", "注意：",
+                    //MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 DirFiles.openFolder(exportDir);
             }
@@ -186,8 +190,11 @@ namespace CharacterConverttoCharacterPics
                 {
                     warnings.playSound();
                     //btn.Parent.Refresh();
-                    MessageBox.Show("字數有所不同，請留意！", "注意：",
-                          MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Button btn = (Button)Application.OpenForms[0].Controls["button1"];
+                    btn.Text= "字數有所不同，請留意！";
+                    btn.Parent.BackColor = Color.BurlyWood;
+                    //MessageBox.Show("字數有所不同，請留意！", "注意：",
+                    //      MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 exportPng(ppt, exportDir);//字數一致，就直接轉成字圖 20210408
                 ppt.Close();//還是會自己關掉，要比較久而已 感恩感恩　南無阿彌陀佛 20210419

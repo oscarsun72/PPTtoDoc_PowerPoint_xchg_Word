@@ -23,8 +23,8 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            
+
+
             //textBox1.SpecialEffect Access才有此屬性：https://docs.microsoft.com/zh-tw/office/vba/api/access.textbox.specialeffect
             //c# - 如何使RichTextBox外观平整？https://www.coder.work/article/953103
             /*这确实是一种hack，但是您可以做的一件事是将Panel控件拖放到页面上。给它设置一个FixedSingle的BorderStyle(默认情况下为None)。
@@ -100,7 +100,8 @@ namespace CharacterConverttoCharacterPics
                     fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text));
                 fontsPics.addCharsSlidesExportPng(wd, ppt, picFolder,
                     Int32.Parse(textBox4.Text));
-                BackColor = Color.Green;
+                if (BackColor != Color.BurlyWood)//若字圖與字型字數無不同，才顯示綠底色
+                    BackColor = Color.Green;
                 warnings.playSound();
             }
             this.Enabled = true; button1.Enabled = true;
@@ -163,7 +164,7 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (App.AppPpt != null&& App.PptAppOpenByCode==true)
+            if (App.AppPpt != null && App.PptAppOpenByCode == true)
             {
                 try
                 { App.AppPpt.Quit(); }
@@ -196,7 +197,7 @@ namespace CharacterConverttoCharacterPics
                 }
             }
             if (App.PptAppOpenByCode)
-                pptApp.Quit();pptApp = null;
+                pptApp.Quit(); pptApp = null;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
