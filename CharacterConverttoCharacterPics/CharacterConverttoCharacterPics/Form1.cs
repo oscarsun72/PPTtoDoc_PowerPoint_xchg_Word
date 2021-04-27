@@ -153,7 +153,7 @@ namespace CharacterConverttoCharacterPics
                 BackColor = Color.DarkOrange;
                 Form2SelFont f2 = new Form2SelFont();
                 f2.Show();
-
+                WindowState = FormWindowState.Minimized;
                 //C# 取消滑鼠事件 handled: https://docs.microsoft.com/zh-tw/dotnet/api/system.windows.forms.handledmouseeventargs?view=net-5.0
                 //未成功，再研究20210425
                 new HandledMouseEventArgs(
@@ -191,6 +191,8 @@ namespace CharacterConverttoCharacterPics
                         TextFrame.TextRange.Font.Size.ToString();
                     if (!fontsOK && close字圖母片)
                         ppt.Close();//不帶參數，不會問你存不存檔，直接不存檔就離開。故若有存檔需要，必須先儲存才行
+                    else
+                        close字圖母片 = true;
                 }
                 else
                 {//如此則可以在一般投影片檢視下，先選擇想要的字型，再自己開啟字圖母片來訂製模板，以供程式參照製作20210423
