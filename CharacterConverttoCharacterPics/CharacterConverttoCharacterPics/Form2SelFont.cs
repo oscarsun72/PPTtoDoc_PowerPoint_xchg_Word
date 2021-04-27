@@ -61,7 +61,9 @@ namespace CharacterConverttoCharacterPics
             DirFiles.appendFontOkList_txt(ls, FontsOpsDoc.fontOkList);
             //Application.OpenForms["Form1"].Controls["textBox2"].Text =
             //    listBox1.SelectedItem.ToString();
-            ppt.Application.Activate(); Application.DoEvents(); Close();
+            ppt.Application.Activate(); Application.DoEvents();
+            Application.OpenForms[0].WindowState = FormWindowState.Minimized;
+            Close();
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
