@@ -15,7 +15,7 @@ namespace CharacterConverttoCharacterPics
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Font fnt= new Font(listBox1.SelectedItem.ToString(),
+            Font fnt = new Font(listBox1.SelectedItem.ToString(),
                 label1.Font.Size);
             label1.Font = fnt; label2.Font = fnt;
         }
@@ -61,7 +61,7 @@ namespace CharacterConverttoCharacterPics
             DirFiles.appendFontOkList_txt(ls, FontsOpsDoc.fontOkList);
             //Application.OpenForms["Form1"].Controls["textBox2"].Text =
             //    listBox1.SelectedItem.ToString();
-            ppt.Application.Activate();Close();
+            ppt.Application.Activate(); Application.DoEvents(); Close();
         }
 
         private void listBox1_KeyDown(object sender, KeyEventArgs e)
