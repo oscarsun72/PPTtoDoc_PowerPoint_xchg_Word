@@ -144,7 +144,8 @@ namespace CharacterConverttoCharacterPics
                 prc.Start();
             }
         }
-
+        static bool close字圖母片 = false;
+        internal static bool Close字圖母片 { get => close字圖母片; set => close字圖母片 = value; }
         private void textBox2_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
@@ -152,7 +153,7 @@ namespace CharacterConverttoCharacterPics
                 BackColor = Color.DarkOrange;
                 Form2SelFont f2 = new Form2SelFont();
                 f2.Show();
-                WindowState = FormWindowState.Minimized;
+
                 //C# 取消滑鼠事件 handled: https://docs.microsoft.com/zh-tw/dotnet/api/system.windows.forms.handledmouseeventargs?view=net-5.0
                 //未成功，再研究20210425
                 new HandledMouseEventArgs(
@@ -188,7 +189,7 @@ namespace CharacterConverttoCharacterPics
                         TextFrame.TextRange.Font.NameFarEast;
                     textBox3.Text = ppt.Slides[2].Shapes[1].
                         TextFrame.TextRange.Font.Size.ToString();
-                    if (!fontsOK)
+                    if (!fontsOK && close字圖母片)
                         ppt.Close();//不帶參數，不會問你存不存檔，直接不存檔就離開。故若有存檔需要，必須先儲存才行
                 }
                 else
