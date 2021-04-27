@@ -152,6 +152,7 @@ namespace CharacterConverttoCharacterPics
                 BackColor = Color.DarkOrange;
                 Form2SelFont f2 = new Form2SelFont();
                 f2.Show();
+                WindowState = FormWindowState.Minimized;
                 //C# 取消滑鼠事件 handled: https://docs.microsoft.com/zh-tw/dotnet/api/system.windows.forms.handledmouseeventargs?view=net-5.0
                 //未成功，再研究20210425
                 new HandledMouseEventArgs(
