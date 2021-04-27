@@ -15,7 +15,8 @@ namespace CharacterConverttoCharacterPics
             getFontCharacterset(string fontName)
         {//準備好各字型檔(不含缺字)相關者
             //https://www.google.com/search?q=c%23+%E8%AE%80%E5%8F%96txt&rlz=1C1JRYI_enTW948TW948&sxsrf=ALeKk00EZy0V-LIAiQBz6f5tr6PPx2AI4w%3A1618768409405&ei=GXJ8YKmVGIu9mAW1io6QDw&oq=c%23+%E8%AE%80%E5%8F%96&gs_lcp=Cgdnd3Mtd2l6EAMYADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELADOgQIIxAnOgQIABBDOgcIABCxAxBDOgQIABAeOgYIABAIEB46CAgAEAgQChAeULWyUlih0FNg-uhTaAtwAHgBgAGPBogB2gmSAQU3LjYtMZgBAKABAaoBB2d3cy13aXrIAQHAAQE&sclient=gws-wiz            
-            winWord.Document d = appDoc.Documents.Add("");
+            winWord.Document d;
+            try {d = appDoc.Documents.Add(""); } catch { App.AppDoc = null; d = appDoc.Documents.Add(""); }
             //d.ActiveWindow.Visible = true;
             using (StreamReader sr = new StreamReader(DirFiles.getCjk_basic_IDS_UCS_Basic_txt().FullName))
                 d.Range().Text = sr.ReadToEnd();//sr在出此行後即會調用Dispose()清除記憶體
@@ -77,7 +78,7 @@ namespace CharacterConverttoCharacterPics
             {//https://bit.ly/3xbEGfH
              //https://oscarsun72.blogspot.com/2021/04/reprintedusing-c.html
                 btn.Parent.Refresh();
-                int charPicCounterOK = 0;                                
+                int charPicCounterOK = 0;
                 string Xpicsok = ""; powerPnt.SlideRange sld;
                 List<powerPnt.Presentation> returnPPTs = new List<powerPnt.Presentation>();
                 string fontname = ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast;
@@ -162,7 +163,7 @@ namespace CharacterConverttoCharacterPics
             powerPnt.Presentation ppt, string exportDir, int howManyCharsPPT = 5000)
         {
             List<powerPnt.Presentation> ppts = addCharsSlides(
-                fontCharacterset, ppt,ppt.FullName, howManyCharsPPT);
+                fontCharacterset, ppt, ppt.FullName, howManyCharsPPT);
             int fontCharactersetCount = fontCharacterset.Range().Characters.Count;
             if (ppts.Count > 0)
             {
@@ -191,7 +192,7 @@ namespace CharacterConverttoCharacterPics
                     warnings.playSound();
                     //btn.Parent.Refresh();
                     Button btn = (Button)Application.OpenForms[0].Controls["button1"];
-                    btn.Text= "字數有所不同，請留意！";
+                    btn.Text = "字數有所不同，請留意！";
                     btn.Parent.BackColor = Color.BurlyWood;
                     //MessageBox.Show("字數有所不同，請留意！", "注意：",
                     //      MessageBoxButtons.OK, MessageBoxIcon.Warning);
