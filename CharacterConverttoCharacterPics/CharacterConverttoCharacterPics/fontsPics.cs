@@ -16,7 +16,7 @@ namespace CharacterConverttoCharacterPics
         {//準備好各字型檔(不含缺字)相關者
             //https://www.google.com/search?q=c%23+%E8%AE%80%E5%8F%96txt&rlz=1C1JRYI_enTW948TW948&sxsrf=ALeKk00EZy0V-LIAiQBz6f5tr6PPx2AI4w%3A1618768409405&ei=GXJ8YKmVGIu9mAW1io6QDw&oq=c%23+%E8%AE%80%E5%8F%96&gs_lcp=Cgdnd3Mtd2l6EAMYADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELADOgQIIxAnOgQIABBDOgcIABCxAxBDOgQIABAeOgYIABAIEB46CAgAEAgQChAeULWyUlih0FNg-uhTaAtwAHgBgAGPBogB2gmSAQU3LjYtMZgBAKABAaoBB2d3cy13aXrIAQHAAQE&sclient=gws-wiz            
             winWord.Document d;
-            try {d = appDoc.Documents.Add(""); } catch { App.AppDoc = null; d = appDoc.Documents.Add(""); }
+            try {d = appDoc.Documents.Add(""); } catch { App.AppDoc = null; appDoc = App.AppDoc; d = appDoc.Documents.Add(""); }
             //d.ActiveWindow.Visible = true;
             using (StreamReader sr = new StreamReader(DirFiles.getCjk_basic_IDS_UCS_Basic_txt().FullName))
                 d.Range().Text = sr.ReadToEnd();//sr在出此行後即會調用Dispose()清除記憶體

@@ -9,3 +9,14 @@ V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_
 V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.CoreCompileInputs.cache
 V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.exe
 V:\Programming\C＃\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.pdb
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.exe.config
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.exe
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.pdb
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csprojAssemblyReference.cache
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.ResolveComReference.cache
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.Form1.resources
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.Properties.Resources.resources
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.GenerateResource.cache
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.CoreCompileInputs.cache
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.exe
+E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.pdb
