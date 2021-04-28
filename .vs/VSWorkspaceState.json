@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\各字型檔(不含缺字)相關"
+    "\\CharacterConverttoCharacterPics",
+    "\\Doc_PPt",
+    "\\Doc_PPt\\Doc_PPt"
   ],
-  "SelectedNode": "\\各字型檔(不含缺字)相關\\fontOkList.txt",
+  "SelectedNode": "\\Doc_PPt\\Doc_PPt.sln",
   "PreviewInSolutionExplorer": false
 }
