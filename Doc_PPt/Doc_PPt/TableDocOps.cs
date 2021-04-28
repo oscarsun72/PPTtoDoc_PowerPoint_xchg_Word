@@ -81,11 +81,17 @@ namespace Doc_PPt
 
                 //插入表格，準備將圖片置入
                 tb = Selection.Tables.Add(Selection.Range, 2, 2);
+                tb.Range.Cells.VerticalAlignment = winWord.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                tb.Range.ParagraphFormat.Alignment = winWord.WdParagraphAlignment.wdAlignParagraphLeft;
+                tb.Columns[1].Width = 359.15F;
+                tb.Columns[2].Width = 122.7F;
                 tb.Rows[2].Cells.Merge();//第二列合併儲存格
                 tb.Borders.InsideLineStyle = //內框樣式
                     winWord.WdLineStyle.wdLineStyleSingle;
                 tb.Borders.OutsideLineStyle =//外框樣式 
                     winWord.WdLineStyle.wdLineStyleDouble;
+                tb.Rows[1].Height = 120.2F;
+                tb.Rows[2].Height = 56;                
                 //表格置中
                 //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
                 //這才有效：//http://www.wordbanter.com/showthread.php?t=110960
@@ -170,7 +176,14 @@ namespace Doc_PPt
                     */
                     #endregion
                     tb.Cell(1, 2).Range.Characters[1].Select();
-                    Selection.Paste();
+                    Selection.Paste();//貼上圖片，配合儲存格調整圖片大小
+                    //winWord.Range rngInlSp;
+                    //if (Selection.Previous().InlineShapes.Count>0 )
+                    //{
+                    //    Selection.Previous().InlineShapes[1].Height;
+                    //}
+                    //Selection.InlineShapes[1].
+
                     Selection.MoveDown(Count:2);
                     //Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
                     //與下一分割出來的表格空2行（段）--即與下一個漢字字源表分開來（距離拉開）

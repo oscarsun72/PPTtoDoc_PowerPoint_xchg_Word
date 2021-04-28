@@ -25,7 +25,9 @@ namespace Doc_PPt
         internal static string getDocFullname()
         {
             TextBox textBox1 = (TextBox)Application.OpenForms[0].Controls["textBox1"];
-            if (textBox1.Text.IndexOf("字源圖片") > 1)
+            string textBox1Text = textBox1.Text;
+            //if (textBox1.Text.IndexOf("字源圖片") > -1)
+            if (textBox1Text!="" && textBox1Text.IndexOf("\\") > -1)
             {
                 return textBox1.Text.Replace(@"file:///", "").Replace("%20", " ");
             }
