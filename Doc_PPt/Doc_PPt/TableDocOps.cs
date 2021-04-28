@@ -15,7 +15,8 @@ namespace Doc_PPt
 
 
         internal void splitTableByEachRowTitleed字源圖片()
-        {
+        {//將字源圖片原來的總表，分割成一個字源一個表格。且都有標題。即每表格有二列
+            //此表格下面再插入一個新的表格，以便置入字源論述及字源圖片和靜態筆順20210428
             if (wdApp.Documents.Count > 0)
             {
                 d = wdApp.ActiveDocument;
@@ -50,12 +51,14 @@ namespace Doc_PPt
             int r, s; winWord.Cell cel; winWord.Range rng;
             winWord.InlineShape inlsp; winWord.Table tb;
             //List<WinWord.InlineShape> inlsps = new List<WinWord.InlineShape>();
-            winWord.Row rw;
-            r = 1;
+            winWord.Row rw; winWord.Range rngInlSp; 
+            const float picCellWidth= 122.7F, picCellHeight= 120.2F;
+             r = 1;
             rng = Selection.Range;
             wdApp.ScreenUpdating = false;
             d.Tables[1].Rows.Add(); d.Tables[1].Rows.Add();//最後會留下一個表格再予刪除
             int picsCount;
+            //開始逐字分割為一表格：
             while (Selection.Information[winWord.WdInformation.
                 wdWithInTable])
             {
@@ -81,16 +84,17 @@ namespace Doc_PPt
 
                 //插入表格，準備將圖片置入
                 tb = Selection.Tables.Add(Selection.Range, 2, 2);
-                tb.Range.Cells.VerticalAlignment = winWord.WdCellVerticalAlignment.wdCellAlignVerticalCenter;
-                tb.Range.ParagraphFormat.Alignment = winWord.WdParagraphAlignment.wdAlignParagraphLeft;
+                tb.Range.Cells.VerticalAlignment = winWord.WdCellVerticalAlignment.wdCellAlignVerticalCenter;//置中對齊
+                tb.Range.ParagraphFormat.Alignment = winWord.WdParagraphAlignment.wdAlignParagraphLeft; //向左對齊
+                tb.Cell(1, 1).VerticalAlignment = winWord.WdCellVerticalAlignment.wdCellAlignVerticalTop;
                 tb.Columns[1].Width = 359.15F;
-                tb.Columns[2].Width = 122.7F;
+                tb.Columns[2].Width = picCellWidth;//圖片儲存格的寬
                 tb.Rows[2].Cells.Merge();//第二列合併儲存格
                 tb.Borders.InsideLineStyle = //內框樣式
                     winWord.WdLineStyle.wdLineStyleSingle;
                 tb.Borders.OutsideLineStyle =//外框樣式 
                     winWord.WdLineStyle.wdLineStyleDouble;
-                tb.Rows[1].Height = 120.2F;
+                tb.Rows[1].Height = picCellHeight;//圖片儲存格的高
                 tb.Rows[2].Height = 56;                
                 //表格置中
                 //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
@@ -100,8 +104,6 @@ namespace Doc_PPt
                 tb.PreferredWidthType = winWord.WdPreferredWidthType.
                     wdPreferredWidthPoints;//https://stackoverflow.com/questions/54159142/set-table-column-widths-in-word-macro-vba
                 tb.PreferredWidth = (float)549.6378;//固定表格寬度 Selection.Document.Tables[r].PreferredWidth;
-                tb.Range.ParagraphFormat.Alignment = winWord.
-                    WdParagraphAlignment.wdAlignParagraphCenter;
 
                 if (Selection.Document.Tables[r].Rows.Count == 1)
                     cel = Selection.Document.Tables[r].Cell(1, 8);
@@ -176,14 +178,19 @@ namespace Doc_PPt
                     */
                     #endregion
                     tb.Cell(1, 2).Range.Characters[1].Select();
-                    Selection.Paste();//貼上圖片，配合儲存格調整圖片大小
-                    //winWord.Range rngInlSp;
-                    //if (Selection.Previous().InlineShapes.Count>0 )
-                    //{
-                    //    Selection.Previous().InlineShapes[1].Height;
-                    //}
-                    //Selection.InlineShapes[1].
-
+                    Selection.Paste();//貼上圖片，配合儲存格調整圖片大小                    
+                    if (Selection.Previous().InlineShapes.Count > 0)
+                        rngInlSp = Selection.Previous();
+                    else //(Selection.Next().InlineShapes.Count > 0)
+                        rngInlSp = Selection.Next();
+                        rngInlSp.InlineShapes[1].LockAspectRatio = MsoTriState.msoTrue;
+                        rngInlSp.InlineShapes[1].Height = picCellHeight;
+                        if (rngInlSp.InlineShapes[1].Width>picCellWidth)
+                        {
+                            rngInlSp.InlineShapes[1].Width = picCellWidth;
+                        }
+                    //以上圖片貼到定位且處理好其大小了
+                    //離開圖片
                     Selection.MoveDown(Count:2);
                     //Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
                     //與下一分割出來的表格空2行（段）--即與下一個漢字字源表分開來（距離拉開）
