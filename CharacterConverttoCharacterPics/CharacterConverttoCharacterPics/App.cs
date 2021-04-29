@@ -7,12 +7,12 @@ namespace CharacterConverttoCharacterPics
     public class App//負責取得應用程式相關之業務
     {
         //static 表示若未加設定為null則本應用程式還開啟時，其生命週期就一直延續著20210419
-        static winWord.Application appDoc;
-        static powerPnt.Application appPpt;
-        static object appOb; static string appClassName;
+        winWord.Application appDoc;//用靜態的（static ）一直會當，改用動態的，每次使用，即一個執行個體，用完即丟
+        powerPnt.Application appPpt;
+        object appOb; string appClassName;
 
-        static bool pptAppOpenbyCode = false;
-        static bool docAppOpenbyCode = false;
+        bool pptAppOpenbyCode = false;
+        bool docAppOpenbyCode = false;
         //public App(app app)
         //{
         //    //switch (app)
@@ -26,7 +26,7 @@ namespace CharacterConverttoCharacterPics
         //    //        break;
         //    //}
         //}
-        public static winWord.Application AppDoc
+        public winWord.Application AppDoc
         {
             get
             {
@@ -48,7 +48,7 @@ namespace CharacterConverttoCharacterPics
             }
             set { AppDoc= value; appOb = value; }
         }
-        public static powerPnt.Application AppPpt
+        public  powerPnt.Application AppPpt
         {
             get
             {
@@ -71,9 +71,9 @@ namespace CharacterConverttoCharacterPics
             }
             set { appOb = value;appPpt = value; }
         }
-        public static bool PptAppOpenByCode { get => pptAppOpenbyCode; set => pptAppOpenbyCode=value; }
-        public static bool DocAppOpenByCode { get => docAppOpenbyCode; set => pptAppOpenbyCode = value; }
-        static object getApp(string appClassName)
+        public bool PptAppOpenByCode { get => pptAppOpenbyCode; set => pptAppOpenbyCode=value; }
+        public bool DocAppOpenByCode { get => docAppOpenbyCode; set => pptAppOpenbyCode = value; }
+        object getApp(string appClassName)
         {
             try
             {
