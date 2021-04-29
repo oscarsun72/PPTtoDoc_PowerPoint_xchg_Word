@@ -144,7 +144,7 @@ namespace CharacterConverttoCharacterPics
                 prc.Start();
             }
         }
-        static bool close字圖母片 = false;
+        static bool close字圖母片 = true;
         internal static bool Close字圖母片 { get => close字圖母片; set => close字圖母片 = value; }
         private void textBox2_MouseDown(object sender, MouseEventArgs e)
         {
