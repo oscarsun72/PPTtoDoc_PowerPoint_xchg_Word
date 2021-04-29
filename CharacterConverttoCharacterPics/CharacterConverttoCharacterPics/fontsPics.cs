@@ -9,14 +9,15 @@ namespace CharacterConverttoCharacterPics
 {
     public class fontsPics//負責「字型轉字圖」業務/工作
     {
-        static winWord.Application appDoc = App.AppDoc;
+
         //static powerPnt.Application appPpt = App.AppPpt;
         internal static winWord.Document
             getFontCharacterset(string fontName)
         {//準備好各字型檔(不含缺字)相關者
             //https://www.google.com/search?q=c%23+%E8%AE%80%E5%8F%96txt&rlz=1C1JRYI_enTW948TW948&sxsrf=ALeKk00EZy0V-LIAiQBz6f5tr6PPx2AI4w%3A1618768409405&ei=GXJ8YKmVGIu9mAW1io6QDw&oq=c%23+%E8%AE%80%E5%8F%96&gs_lcp=Cgdnd3Mtd2l6EAMYADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELADOgQIIxAnOgQIABBDOgcIABCxAxBDOgQIABAeOgYIABAIEB46CAgAEAgQChAeULWyUlih0FNg-uhTaAtwAHgBgAGPBogB2gmSAQU3LjYtMZgBAKABAaoBB2d3cy13aXrIAQHAAQE&sclient=gws-wiz            
+            App app = new App(); winWord.Application appDoc=app.AppDoc;
             winWord.Document d;
-            try {d = appDoc.Documents.Add(""); } catch { App.AppDoc = null; appDoc = App.AppDoc; d = appDoc.Documents.Add(""); }
+            try {d = appDoc.Documents.Add(""); } catch { app.AppDoc = null; appDoc = app.AppDoc; d = appDoc.Documents.Add(""); }
             //d.ActiveWindow.Visible = true;
             using (StreamReader sr = new StreamReader(DirFiles.getCjk_basic_IDS_UCS_Basic_txt().FullName))
                 d.Range().Text = sr.ReadToEnd();//sr在出此行後即會調用Dispose()清除記憶體
@@ -30,7 +31,7 @@ namespace CharacterConverttoCharacterPics
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                 if (dr == DialogResult.Cancel)
                 {
-                    if (App.DocAppOpenByCode) appDoc.Quit(winWord.
+                    if (app.DocAppOpenByCode) appDoc.Quit(winWord.
                         WdSaveOptions.wdDoNotSaveChanges);
                     appDoc = null;
                     Application.OpenForms[0].BackColor = Color.White;
@@ -113,8 +114,9 @@ namespace CharacterConverttoCharacterPics
                             catch (System.Exception)
                             {
                                 Application.DoEvents();//讓系統處理完pptApp當掉的程序
-                                App.AppPpt = null;
-                                ppt = App.AppPpt.Presentations.Open(pptFullname);
+                                App app = new App();
+                                app.AppPpt = null;
+                                ppt = app.AppPpt.Presentations.Open(pptFullname);
                                 if (ppt.Slides.Count == 2)
                                 {
                                     charPicCounter = 0; Xpicsok = "";
@@ -201,11 +203,13 @@ namespace CharacterConverttoCharacterPics
                 ppt.Close();//還是會自己關掉，要比較久而已 感恩感恩　南無阿彌陀佛 20210419
                 //ppt = null;//close()了就不用此行設為null了
             }
-            if (App.PptAppOpenByCode)//若是PowerPoint是由程式開啟則關閉。會經過一段時間，或本應用程式結束後一段時間，才會關閉20210419
-            { App.AppPpt.Quit(); App.AppPpt = null; }//然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
+            App app = new App();
+            if (app.PptAppOpenByCode)//若是PowerPoint是由程式開啟則關閉。會經過一段時間，或本應用程式結束後一段時間，才會關閉20210419
+            {
+                ppt.Application.Quit(); 
+            }//然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
             fontCharacterset.Close();
-            if (App.DocAppOpenByCode) appDoc.Quit();
-            appDoc = null;
+            if (app.DocAppOpenByCode) fontCharacterset.Application.Quit();            
             //warnings.playSound();// (ppt.Slides.Count);
         }
 

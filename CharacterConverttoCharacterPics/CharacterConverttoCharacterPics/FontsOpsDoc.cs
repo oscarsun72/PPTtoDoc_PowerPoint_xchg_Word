@@ -13,12 +13,14 @@ namespace CharacterConverttoCharacterPics
                 winWord.Application docapp; 
                 try
                 {
-                    docapp=App.AppDoc;
+                    App app = new App();
+                    docapp =app.AppDoc;
                 }
                 catch (System.Exception)
                 {
-                    App.AppDoc = null;
-                    docapp = App.AppDoc;
+                    App app = new App();
+                    app.AppDoc = null;
+                    docapp = app.AppDoc;
                 }
                 List<string> ls = new List<string>();
                 foreach (var item in docapp.FontNames)
@@ -109,7 +111,8 @@ namespace CharacterConverttoCharacterPics
 
         void FontIterator()
         {
-            foreach (string fnt in App.AppDoc.FontNames)
+            App app = new App();
+            foreach (string fnt in app.AppDoc.FontNames)
             {
                 //if (fnt.ind "隸") || InStr(1, fnt, "li", vbTextCompare)) And InStr(1, fnt, "@", vbTextCompare) = 0 And InStr(1, fnt, "lian", vbTextCompare) = 0 And InStr(1, fnt, "Libre", vbTextCompare) = 0 And InStr(1, fnt, "Lith", vbTextCompare) = 0 And InStr(1, fnt, "Liber", vbTextCompare) = 0 And InStr(1, fnt, "light", vbTextCompare) = 0 And InStr(1, fnt, "Franklin", vbTextCompare) = 0 And InStr(1, fnt, "Italic", vbTextCompare) = 0 {
                 //    ThisDocument.Range.Font.Name = fnt
@@ -132,13 +135,14 @@ namespace CharacterConverttoCharacterPics
         void FontsListView(winWord.Document ThisDocument)
         {
             int fontCount, i = 0; string x, xp = "";
-            fontCount = App.AppDoc.FontNames.Count;
+            App app = new App();
+            fontCount = app.AppDoc.FontNames.Count;
             x = "\r\n" + ThisDocument.Paragraphs[1].Range.Text.Substring
                 (0, ThisDocument.Paragraphs[1].Range.Text.Length - 1);
             for (int j = 2; j <= fontCount; j++)
                 xp += x;
             ThisDocument.Range().InsertAfter(xp);
-            foreach (string ft in App.AppDoc.FontNames)
+            foreach (string ft in app.AppDoc.FontNames)
             {
                 i++;
                 ThisDocument.Paragraphs[i].Range.Font.Name = ft;
