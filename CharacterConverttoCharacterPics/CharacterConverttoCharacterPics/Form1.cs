@@ -144,7 +144,7 @@ namespace CharacterConverttoCharacterPics
                 prc.Start();
             }
         }
-        static bool close字圖母片 = false;
+        static bool close字圖母片 = true;
         internal static bool Close字圖母片 { get => close字圖母片; set => close字圖母片 = value; }
         private void textBox2_MouseDown(object sender, MouseEventArgs e)
         {
@@ -166,19 +166,22 @@ namespace CharacterConverttoCharacterPics
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (App.AppPpt != null && App.PptAppOpenByCode == true)
-            {
-                try
-                { App.AppPpt.Quit(); }
-                catch
-                { App.AppPpt = null; }
-            }
+            /*改動態後當不必再用下列方式中止
+            //App app = new App();
+            //if (app.AppPpt != null && app.PptAppOpenByCode == true)
+            //{
+            //    try
+            //    { app.AppPpt.Quit(); }
+            //    catch
+            //    { app.AppPpt = null; }
+            //}
+            */
         }
 
         private void Form1_Activated(object sender, EventArgs e)
         {
-            App.AppPpt = null;
-            powerPnt.Application pptApp = App.AppPpt;
+            App app = new App();
+            powerPnt.Application pptApp = app.AppPpt;
             if (pptApp.Presentations.Count > 0)
             {
                 powerPnt.Presentation ppt = pptApp.ActivePresentation;
@@ -200,7 +203,7 @@ namespace CharacterConverttoCharacterPics
                         TextFrame.TextRange.Font.NameFarEast;
                 }
             }
-            if (App.PptAppOpenByCode)
+            if (app.PptAppOpenByCode)
                 pptApp.Quit(); pptApp = null;
         }
 

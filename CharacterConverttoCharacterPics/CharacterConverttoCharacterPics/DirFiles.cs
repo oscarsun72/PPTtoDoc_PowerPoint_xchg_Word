@@ -75,7 +75,8 @@ namespace CharacterConverttoCharacterPics
         {
             try
             {
-                powerPnt.Application pptApp = App.AppPpt;
+                App app = new App();
+                powerPnt.Application pptApp = app.AppPpt;
                 foreach (powerPnt.Presentation ppt in pptApp.Presentations)
                 {
                     if (ppt.Name == "字圖母片.pptm")
@@ -89,8 +90,9 @@ namespace CharacterConverttoCharacterPics
             catch (System.Exception)
             {
                 Application.DoEvents();
-                App.AppPpt = null;
-                return App.AppPpt.Presentations.Open(
+                App app = new App();
+                app.AppPpt = null;
+                return app.AppPpt.Presentations.Open(
                     getDirRoot + "字圖母片.pptm");
             }
 
