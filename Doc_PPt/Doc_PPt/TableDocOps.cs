@@ -93,7 +93,7 @@ namespace Doc_PPt
                 tb.Borders.InsideLineStyle = //內框樣式
                     winWord.WdLineStyle.wdLineStyleSingle;
                 tb.Borders.OutsideLineStyle =//外框樣式 
-                    winWord.WdLineStyle.wdLineStyleDouble;
+                    winWord.WdLineStyle.wdLineStyleSingle;//winWord.WdLineStyle.wdLineStyleDouble;
                 tb.Rows[1].Height = picCellHeight;//圖片儲存格的高
                 tb.Rows[2].Height = 56;                
                 //表格置中
