@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Media;
 using System.Windows.Forms;
 using powerPnt = Microsoft.Office.Interop.PowerPoint;
 using winWord = Microsoft.Office.Interop.Word;
@@ -11,7 +12,7 @@ namespace CharacterConverttoCharacterPics
     {
 
         //static powerPnt.Application appPpt = App.AppPpt;
-        internal static winWord.Document
+        internal winWord.Document
             getFontCharacterset(string fontName)
         {//準備好各字型檔(不含缺字)相關者
             //https://www.google.com/search?q=c%23+%E8%AE%80%E5%8F%96txt&rlz=1C1JRYI_enTW948TW948&sxsrf=ALeKk00EZy0V-LIAiQBz6f5tr6PPx2AI4w%3A1618768409405&ei=GXJ8YKmVGIu9mAW1io6QDw&oq=c%23+%E8%AE%80%E5%8F%96&gs_lcp=Cgdnd3Mtd2l6EAMYADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BQgAELADOgQIIxAnOgQIABBDOgcIABCxAxBDOgQIABAeOgYIABAIEB46CAgAEAgQChAeULWyUlih0FNg-uhTaAtwAHgBgAGPBogB2gmSAQU3LjYtMZgBAKABAaoBB2d3cy13aXrIAQHAAQE&sclient=gws-wiz            
@@ -50,7 +51,7 @@ namespace CharacterConverttoCharacterPics
         }
 
 
-        internal static powerPnt.Presentation prepareFontPPT(string fontName,
+        internal powerPnt.Presentation prepareFontPPT(string fontName,
             float fontsize, string filenameSaveAs = "")
         {
             if (filenameSaveAs == "") filenameSaveAs = fontName + "(不含缺字).pptm";
@@ -65,11 +66,10 @@ namespace CharacterConverttoCharacterPics
             //ppt.Application.Visible = Microsoft.Office.Core.MsoTriState.msoTrue;//沒有這行一樣會現出現來，與Word不同。
             return ppt;
         }
-
-        static int charPicCounter = 0;
+        int charPicCounter = 0;
         public int CharPicCounter { get => charPicCounter; }
 
-        static List<powerPnt.Presentation> addCharsSlides(winWord.Document fontCharacterset,
+        List<powerPnt.Presentation> addCharsSlides(winWord.Document fontCharacterset,
             powerPnt.Presentation ppt, string pptFullname
             , int howManyCharsPPT = 5000)
         {
@@ -154,14 +154,15 @@ namespace CharacterConverttoCharacterPics
                     }
                 }
                 ppt.Slides[2].Delete();//第2張是作樣本Duplicate()之依據，故用完即丟
-                warnings.playBeep();
+                //warnings.playBeep();
+                SystemSounds.Asterisk.Play();
                 ppt.Save();//以免當掉
                 returnPPTs.Add(ppt);
                 return returnPPTs;
             }
         }
 
-        internal static void addCharsSlidesExportPng(winWord.Document fontCharacterset,
+        internal void addCharsSlidesExportPng(winWord.Document fontCharacterset,
             powerPnt.Presentation ppt, string exportDir, int howManyCharsPPT = 5000)
         {
             List<powerPnt.Presentation> ppts = addCharsSlides(
@@ -213,7 +214,7 @@ namespace CharacterConverttoCharacterPics
             //warnings.playSound();// (ppt.Slides.Count);
         }
 
-        static void exportPng(powerPnt.Presentation ppt, string picDir
+        void exportPng(powerPnt.Presentation ppt, string picDir
             , int pptsCount = 0)
         {
             string w; DirFiles.getPicFolder(picDir);
