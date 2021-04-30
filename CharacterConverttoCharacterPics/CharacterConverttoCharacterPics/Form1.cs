@@ -88,7 +88,7 @@ namespace CharacterConverttoCharacterPics
             BackColor = Color.Gray;
             this.Enabled = false; button1.Enabled = false;
             string fontname = textBox2.Text;
-            WinWord.Document wd = fontsPics.getFontCharacterset
+            WinWord.Document wd = new fontsPics().getFontCharacterset
                 (fontname);
             if (wd != null)
             {
@@ -97,8 +97,8 @@ namespace CharacterConverttoCharacterPics
                 if (picFolder.IndexOf(fontname) == -1)
                 { picFolder += ("\\" + fontname + "\\"); }
                 powerPnt.Presentation ppt =
-                    fontsPics.prepareFontPPT(fontname, float.Parse(textBox3.Text));
-                fontsPics.addCharsSlidesExportPng(wd, ppt, picFolder,
+                    new fontsPics().prepareFontPPT(fontname, float.Parse(textBox3.Text));
+                new fontsPics().addCharsSlidesExportPng(wd, ppt, picFolder,
                     Int32.Parse(textBox4.Text));
                 if (BackColor != Color.BurlyWood)//若字圖與字型字數無不同，才顯示綠底色
                     BackColor = Color.Green;
