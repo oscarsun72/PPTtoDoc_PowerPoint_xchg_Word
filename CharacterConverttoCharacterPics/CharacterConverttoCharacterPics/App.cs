@@ -13,19 +13,23 @@ namespace CharacterConverttoCharacterPics
 
         bool pptAppOpenbyCode = false;
         bool docAppOpenbyCode = false;
-        //public App(app app)
-        //{
-        //    //switch (app)
-        //    //{
-        //    //    case app.Word:
-        //    //        break;
-        //    //    case app.PowerPoint:
-
-        //    //        break;
-        //    //    default:
-        //    //        break;
-        //    //}
-        //}
+        public App(app app=app.Default)
+        {
+            switch (app)
+            {
+                case app.Word:
+                    appDoc = null;
+                    break;
+                case app.PowerPoint:
+                    appPpt = null;
+                    break;
+                default:
+                    appOb = null;
+                    appDoc = null;
+                    appPpt = null;
+                    break;
+            }
+        }
         public winWord.Application AppDoc
         {
             get
@@ -89,6 +93,6 @@ namespace CharacterConverttoCharacterPics
     }
     public enum app : byte
     {
-        Word, PowerPoint
+        Default,Word, PowerPoint
     }
 }
