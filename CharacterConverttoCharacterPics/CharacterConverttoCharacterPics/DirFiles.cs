@@ -71,7 +71,7 @@ namespace CharacterConverttoCharacterPics
         }
 
         //internal powerPnt.Presentation get字圖母片pptm()
-        internal static powerPnt.Presentation get字圖母片pptm()
+        internal powerPnt.Presentation get字圖母片pptm()
         {
             try
             {
@@ -90,9 +90,13 @@ namespace CharacterConverttoCharacterPics
             catch (System.Exception)
             {
                 Application.DoEvents();
-                App app = new App();
-                app.AppPpt = null;
-                return app.AppPpt.Presentations.Open(
+                //App app = new App()
+                //{
+                //    AppPpt = null
+                //};
+                
+                return new App(app.PowerPoint)
+                    .AppPpt.Presentations.Open(
                     getDirRoot + "字圖母片.pptm");
             }
 

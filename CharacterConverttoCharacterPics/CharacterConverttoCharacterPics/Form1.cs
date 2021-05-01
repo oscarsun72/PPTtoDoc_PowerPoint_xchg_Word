@@ -76,6 +76,7 @@ namespace CharacterConverttoCharacterPics
 
         private void goFontsCharsToPics()
         {
+            try { 
             string chDir = DirFiles.searchRootDirChange(textBox1.Text);
             if (chDir == "")
             {
@@ -105,6 +106,13 @@ namespace CharacterConverttoCharacterPics
                 warnings.playSound();
             }
             this.Enabled = true; button1.Enabled = true;
+            }
+            catch(Exception e)
+            {
+                WinWord.Document d = new WinWord.Application().Documents.Add();
+                d.Range().Text = e.Message + e.Data + e.Source;
+                d.ActiveWindow.Visible = true;
+            }
         }
 
         private void textBox2_Click(object sender, EventArgs e)
@@ -203,7 +211,7 @@ namespace CharacterConverttoCharacterPics
                     //    TextFrame.TextRange.Font.NameFarEast;
                 }
             }
-            if (app.PptAppOpenByCode)
+            if (App.PptAppOpenByCode)
                 pptApp.Quit(); pptApp = null;
         }
 
