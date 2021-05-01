@@ -46,7 +46,7 @@ namespace CharacterConverttoCharacterPics
 
         private void selectFontWanted()
         {
-            powerPnt.Presentation ppt = DirFiles.get字圖母片pptm();
+            powerPnt.Presentation ppt = new DirFiles().get字圖母片pptm();
             //App.PptAppOpenByCode = false;
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast =
                 FontNameWanted;

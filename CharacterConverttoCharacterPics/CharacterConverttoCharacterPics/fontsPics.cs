@@ -32,7 +32,7 @@ namespace CharacterConverttoCharacterPics
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                 if (dr == DialogResult.Cancel)
                 {
-                    if (app.DocAppOpenByCode) appDoc.Quit(winWord.
+                    if (App.DocAppOpenByCode) appDoc.Quit(winWord.
                         WdSaveOptions.wdDoNotSaveChanges);
                     appDoc = null;
                     Application.OpenForms[0].BackColor = Color.White;
@@ -57,7 +57,7 @@ namespace CharacterConverttoCharacterPics
             if (filenameSaveAs == "") filenameSaveAs = fontName + "(不含缺字).pptm";
             //DirFiles df = new DirFiles();
             //powerPnt.Presentation ppt = df.get字圖母片pptm();
-            powerPnt.Presentation ppt = DirFiles.get字圖母片pptm();
+            powerPnt.Presentation ppt = new DirFiles().get字圖母片pptm();
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast =
                 fontName;
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.Size = fontsize;
@@ -204,13 +204,13 @@ namespace CharacterConverttoCharacterPics
                 ppt.Close();//還是會自己關掉，要比較久而已 感恩感恩　南無阿彌陀佛 20210419
                 //ppt = null;//close()了就不用此行設為null了
             }
-            App app = new App();
-            if (app.PptAppOpenByCode)//若是PowerPoint是由程式開啟則關閉。會經過一段時間，或本應用程式結束後一段時間，才會關閉20210419
-            {
+            //App app = new App();
+            foreach (powerPnt.Presentation item in ppts)item.Close();
+            if (App.PptAppOpenByCode)//若是PowerPoint是由程式開啟則關閉。會經過一段時間，或本應用程式結束後一段時間，才會關閉20210419
                 ppt.Application.Quit(); 
-            }//然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
+            //然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
             fontCharacterset.Close();
-            if (app.DocAppOpenByCode) fontCharacterset.Application.Quit();            
+            if (App.DocAppOpenByCode) fontCharacterset.Application.Quit();            
             //warnings.playSound();// (ppt.Slides.Count);
         }
 
