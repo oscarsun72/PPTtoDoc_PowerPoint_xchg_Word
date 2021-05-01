@@ -32,7 +32,7 @@ namespace CharacterConverttoCharacterPics
                     MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
                 if (dr == DialogResult.Cancel)
                 {
-                    if (App.DocAppOpenByCode) appDoc.Quit(winWord.
+                    if (app.DocAppOpenByCode) appDoc.Quit(winWord.
                         WdSaveOptions.wdDoNotSaveChanges);
                     appDoc = null;
                     Application.OpenForms[0].BackColor = Color.White;
@@ -210,13 +210,9 @@ namespace CharacterConverttoCharacterPics
                 fList_done已完成.Add(new FileInfo(item.FullName));
                 item.Close();
             }
-            if (App.PptAppOpenByCode)//若是PowerPoint是由程式開啟則關閉。會經過一段時間，或本應用程式結束後一段時間，才會關閉20210419                
-                ppt.Application.Quit();
-            //然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
             fList_done已完成.Add(new FileInfo(fontCharacterset.FullName));
+            //然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
             fontCharacterset.Close();
-            if (App.DocAppOpenByCode) fontCharacterset.Application.Quit();
-            //warnings.playSound();// (ppt.Slides.Count);
             string destFilename;
             foreach (FileInfo item in fList_done已完成)
             {
@@ -224,6 +220,13 @@ namespace CharacterConverttoCharacterPics
                     item.Name;
                 if (!File.Exists(destFilename))item.MoveTo(destFilename);
             }
+            /* 以下關閉程式應是由呼叫端來管控，因為本函式只接收呼叫端的ppt 與 doc而已，並不知道app 開啟的屬性是什麼
+            if (App.PptAppOpenByCode)//若是PowerPoint是由程式開啟則關閉。會經過一段時間，或本應用程式結束後一段時間，才會關閉20210419                
+                ppt.Application.Quit();
+            if (App.DocAppOpenByCode) fontCharacterset.Application.Quit();            
+             * 
+             * 
+             */
         }
 
         void exportPng(powerPnt.Presentation ppt, string picDir

@@ -99,7 +99,8 @@ namespace CharacterConverttoCharacterPics
                     if (picFolder.IndexOf(fontname) == -1)
                     { picFolder += ("\\" + fontname + "\\"); }
                     powerPnt.Presentation ppt =
-                        new fontsPics().prepareFontPPT(fontname, float.Parse(textBox3.Text));
+                        new fontsPics().prepareFontPPT(fontname,
+                        float.Parse(textBox3.Text));
                     new fontsPics().addCharsSlidesExportPng(wd, ppt, picFolder,
                         Int32.Parse(textBox4.Text));
                     if (BackColor != Color.BurlyWood)//若字圖與字型字數無不同，才顯示綠底色
@@ -218,7 +219,7 @@ namespace CharacterConverttoCharacterPics
                     //    TextFrame.TextRange.Font.NameFarEast;
                 }
             }
-            if (App.PptAppOpenByCode)
+            if (app.PptAppOpenByCode)
                 pptApp.Quit(); pptApp = null;
         }
 
