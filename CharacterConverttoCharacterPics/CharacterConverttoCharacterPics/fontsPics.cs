@@ -210,9 +210,7 @@ namespace CharacterConverttoCharacterPics
                 fList_done已完成.Add(new FileInfo(item.FullName));
                 item.Close();
             }
-            fList_done已完成.Add(new FileInfo(fontCharacterset.FullName));
-            //然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19
-            fontCharacterset.Close();
+            //然剛才發現，只要本應用程式關閉，則會瞬間跟著關掉20210419 20:19            
             string destFilename;
             foreach (FileInfo item in fList_done已完成)
             {

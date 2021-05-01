@@ -103,6 +103,13 @@ namespace CharacterConverttoCharacterPics
                         float.Parse(textBox3.Text));
                     new fontsPics().addCharsSlidesExportPng(wd, ppt, picFolder,
                         Int32.Parse(textBox4.Text));
+                    FileInfo wdf = new FileInfo(wd.FullName);
+                    WinWord.Application wdApp = wd.Application;
+                    wd.Close();
+                    if (!wdApp.UserControl) wdApp.Quit();                    
+                    string destFilename = wdf.Directory.FullName
+                                    + "\\done已完成\\" + wdf.Name;
+                    if (!File.Exists(destFilename)) wdf.MoveTo(destFilename);
                     if (BackColor != Color.BurlyWood)//若字圖與字型字數無不同，才顯示綠底色
                         BackColor = Color.Green;
                     warnings.playSound();
@@ -113,13 +120,13 @@ namespace CharacterConverttoCharacterPics
             {
                 WinWord.Document d = new WinWord.Application().Documents.Add();
                 d.Range().Text = e.Message + "\n\r\n\r" +
-                    e.Data + "\n\r\n\r" + e.Data+
-                    "\n\r\n\r" + e.Source +"\n\r\n\r" +
+                    e.Data + "\n\r\n\r" + e.Data +
+                    "\n\r\n\r" + e.Source + "\n\r\n\r" +
                     e.HelpLink + "\n\r\n\r" + e.HResult + "\n\r\n\r" +
                     e.InnerException + "\n\r\n\r" +
                     e.StackTrace + "\n\r\n\r" +
-                    e.TargetSite + "\n\r\n\r" +e.ToString();
-                 d.ActiveWindow.Visible = true;
+                    e.TargetSite + "\n\r\n\r" + e.ToString();
+                d.ActiveWindow.Visible = true;
             }
         }
 
