@@ -11,8 +11,8 @@ namespace CharacterConverttoCharacterPics
         powerPnt.Application appPpt;
         object appOb; string appClassName;
 
-        static bool pptAppOpenbyCode = false;
-        static bool docAppOpenbyCode = false;
+        bool pptAppOpenbyCode = false;//個人管人個開的程式，故不應是靜態的
+        bool docAppOpenbyCode = false;
         public App(app app=app.Default)
         {
             switch (app)
@@ -75,8 +75,8 @@ namespace CharacterConverttoCharacterPics
             }
             set { appOb = value;appPpt = value; }
         }
-        public static bool PptAppOpenByCode { get => pptAppOpenbyCode; set => pptAppOpenbyCode=value; }
-        public static bool DocAppOpenByCode { get => docAppOpenbyCode; set => pptAppOpenbyCode = value; }
+        public bool PptAppOpenByCode { get => pptAppOpenbyCode; set => pptAppOpenbyCode=value; }
+        public bool DocAppOpenByCode { get => docAppOpenbyCode; set => pptAppOpenbyCode = value; }
         object getApp(string appClassName)
         {
             try

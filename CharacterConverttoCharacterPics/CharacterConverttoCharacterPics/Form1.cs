@@ -76,41 +76,57 @@ namespace CharacterConverttoCharacterPics
 
         private void goFontsCharsToPics()
         {
-            try { 
-            string chDir = DirFiles.searchRootDirChange(textBox1.Text);
-            if (chDir == "")
+            try
             {
-                MessageBox.Show("並無此目錄,請確認後再執行！", "",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            else if (textBox1.Text != chDir) textBox1.Text = chDir;
+                string chDir = DirFiles.searchRootDirChange(textBox1.Text);
+                if (chDir == "")
+                {
+                    MessageBox.Show("並無此目錄,請確認後再執行！", "",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (textBox1.Text != chDir) textBox1.Text = chDir;
 
-            BackColor = Color.Gray;
-            this.Enabled = false; button1.Enabled = false;
-            string fontname = textBox2.Text;
-            WinWord.Document wd = new fontsPics().getFontCharacterset
-                (fontname);
-            if (wd != null)
-            {
-                BackColor = Color.Red;
-                string picFolder = textBox1.Text;
-                if (picFolder.IndexOf(fontname) == -1)
-                { picFolder += ("\\" + fontname + "\\"); }
-                powerPnt.Presentation ppt =
-                    new fontsPics().prepareFontPPT(fontname, float.Parse(textBox3.Text));
-                new fontsPics().addCharsSlidesExportPng(wd, ppt, picFolder,
-                    Int32.Parse(textBox4.Text));
-                if (BackColor != Color.BurlyWood)//若字圖與字型字數無不同，才顯示綠底色
-                    BackColor = Color.Green;
-                warnings.playSound();
+                BackColor = Color.Gray;
+                this.Enabled = false; button1.Enabled = false;
+                string fontname = textBox2.Text;
+                WinWord.Document wd = new fontsPics().getFontCharacterset
+                    (fontname);
+                if (wd != null)
+                {
+                    BackColor = Color.Red;
+                    string picFolder = textBox1.Text;
+                    if (picFolder.IndexOf(fontname) == -1)
+                    { picFolder += ("\\" + fontname + "\\"); }
+                    powerPnt.Presentation ppt =
+                        new fontsPics().prepareFontPPT(fontname,
+                        float.Parse(textBox3.Text));
+                    new fontsPics().addCharsSlidesExportPng(wd, ppt, picFolder,
+                        Int32.Parse(textBox4.Text));
+                    FileInfo wdf = new FileInfo(wd.FullName);
+                    WinWord.Application wdApp = wd.Application;
+                    wd.Close();//執行完成，關閉因程式而開啟的Word
+                    if (!wdApp.UserControl) wdApp.Quit();   
+                    //移動已完成的檔案到已完成資料夾下
+                    string destFilename = wdf.Directory.FullName
+                                    + "\\done已完成\\" + wdf.Name;
+                    if (!File.Exists(destFilename)) wdf.MoveTo(destFilename);
+                    if (BackColor != Color.BurlyWood)//若字圖與字型字數無不同，才顯示綠底色
+                        BackColor = Color.Green;
+                    warnings.playSound();
+                }
+                this.Enabled = true; button1.Enabled = true;
             }
-            this.Enabled = true; button1.Enabled = true;
-            }
-            catch(Exception e)
+            catch (Exception e)
             {
                 WinWord.Document d = new WinWord.Application().Documents.Add();
-                d.Range().Text = e.Message + e.Data + e.Source;
+                d.Range().Text = e.Message + "\n\r\n\r" +
+                    e.Data + "\n\r\n\r" + e.Data +
+                    "\n\r\n\r" + e.Source + "\n\r\n\r" +
+                    e.HelpLink + "\n\r\n\r" + e.HResult + "\n\r\n\r" +
+                    e.InnerException + "\n\r\n\r" +
+                    e.StackTrace + "\n\r\n\r" +
+                    e.TargetSite + "\n\r\n\r" + e.ToString();
                 d.ActiveWindow.Visible = true;
             }
         }
@@ -211,7 +227,7 @@ namespace CharacterConverttoCharacterPics
                     //    TextFrame.TextRange.Font.NameFarEast;
                 }
             }
-            if (App.PptAppOpenByCode)
+            if (app.PptAppOpenByCode)
                 pptApp.Quit(); pptApp = null;
         }
 
