@@ -105,8 +105,9 @@ namespace CharacterConverttoCharacterPics
                         Int32.Parse(textBox4.Text));
                     FileInfo wdf = new FileInfo(wd.FullName);
                     WinWord.Application wdApp = wd.Application;
-                    wd.Close();
-                    if (!wdApp.UserControl) wdApp.Quit();                    
+                    wd.Close();//執行完成，關閉因程式而開啟的Word
+                    if (!wdApp.UserControl) wdApp.Quit();   
+                    //移動已完成的檔案到已完成資料夾下
                     string destFilename = wdf.Directory.FullName
                                     + "\\done已完成\\" + wdf.Name;
                     if (!File.Exists(destFilename)) wdf.MoveTo(destFilename);
