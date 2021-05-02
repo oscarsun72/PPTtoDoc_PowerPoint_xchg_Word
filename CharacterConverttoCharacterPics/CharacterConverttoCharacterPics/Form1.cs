@@ -126,6 +126,7 @@ namespace CharacterConverttoCharacterPics
                 d.Range().InsertParagraphAfter();
                 d.Paragraphs[++paraIndex].Range.Text= e.Message;
 
+                d.Range().InsertParagraphAfter(); 
                 d.Range().Text = "e:";
                 d.Paragraphs[++paraIndex].set_Style("標題 5");
                 d.Range().InsertParagraphAfter();
