@@ -223,8 +223,8 @@ namespace CharacterConverttoCharacterPics
                 }
                 else
                 {//如此則可以在一般投影片檢視下，先選擇想要的字型，再自己開啟字圖母片來訂製模板，以供程式參照製作20210423
-                    //textBox2.Text = ppt.Slides[2].Shapes[1].
-                    //    TextFrame.TextRange.Font.NameFarEast;
+                    textBox2.Text = ppt.Slides[2].Shapes[1].
+                        TextFrame.TextRange.Font.NameFarEast;
                 }
             }
             if (app.PptAppOpenByCode)
