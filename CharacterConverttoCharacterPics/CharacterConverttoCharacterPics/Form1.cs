@@ -120,13 +120,68 @@ namespace CharacterConverttoCharacterPics
             catch (Exception e)
             {
                 WinWord.Document d = new WinWord.Application().Documents.Add();
-                d.Range().Text = e.Message + "\n\r\n\r" +
+                int paraIndex = 0;
+                d.Range().Text="e.Message:";                
+                d.Paragraphs[++paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text= e.Message;
+
+                d.Range().Text = "e:";
+                d.Paragraphs[++paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = e.ToString();
+
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text= "e.Data:";
+                d.Paragraphs[paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text= e.Data.ToString();
+
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text= "e.Source:";
+                d.Paragraphs[paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text= e.Source;
+
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text= "e.HelpLink:";
+                d.Paragraphs[paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = e.HelpLink;
+
+
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = "e.InnerException:";
+                d.Paragraphs[paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = e.InnerException.ToString();
+
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = "e.HResult:";
+                d.Paragraphs[paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = e.HResult.ToString();
+
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = "e.StackTrace:";
+                d.Paragraphs[paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = e.StackTrace;
+
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = "e.TargetSite:";
+                d.Paragraphs[paraIndex].set_Style("標題 5");
+                d.Range().InsertParagraphAfter();
+                d.Paragraphs[++paraIndex].Range.Text = e.TargetSite.ToString();
+               /*
+                 d.Range().Text = e.Message + "\n\r\n\r" +
                     e.Data + "\n\r\n\r" + e.Data +
                     "\n\r\n\r" + e.Source + "\n\r\n\r" +
                     e.HelpLink + "\n\r\n\r" + e.HResult + "\n\r\n\r" +
                     e.InnerException + "\n\r\n\r" +
                     e.StackTrace + "\n\r\n\r" +
                     e.TargetSite + "\n\r\n\r" + e.ToString();
+                 */
                 d.ActiveWindow.Visible = true;
             }
         }
