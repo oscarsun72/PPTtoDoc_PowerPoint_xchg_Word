@@ -50,7 +50,7 @@ namespace CharacterConverttoCharacterPics
             //App.PptAppOpenByCode = false;
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Font.NameFarEast =
                 FontNameWanted;
-            ppt.Slides[2].Select();
+            ppt.Slides[2].Shapes[1].TextFrame.TextRange.Select();
             Clipboard.SetText(listBox1.SelectedItem.ToString());
             List<string> ls = new List<string>();
             int idx = listBox1.SelectedIndex;
