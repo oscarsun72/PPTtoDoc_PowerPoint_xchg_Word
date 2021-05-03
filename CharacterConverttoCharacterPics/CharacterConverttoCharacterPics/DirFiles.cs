@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Windows.Forms;
 using powerPnt = Microsoft.Office.Interop.PowerPoint;
@@ -136,6 +137,16 @@ namespace CharacterConverttoCharacterPics
             }
             return dir;
 
+        }
+        //將指定資料夾包成同名壓縮檔zip
+        internal static void zipFolderFiles(string dir)
+        {
+            if (Directory.Exists(dir) == false) return;
+            DirectoryInfo di = new DirectoryInfo(dir);
+            ZipFile.CreateFromDirectory(dir,
+                di.Parent.FullName + "\\" + di.Name + ".zip",
+                CompressionLevel.NoCompression, true
+                );
         }
     }
 }
