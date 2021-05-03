@@ -20,3 +20,14 @@ E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_Power
 E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.CoreCompileInputs.cache
 E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.exe
 E:\@@@華語文工具及資料@@@\Macros\程式開發程式設計\PPTtoDoc_PowerPoint_xchg_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.pdb
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.exe.config
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.exe
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\bin\Debug\Doc_PPt.pdb
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csprojAssemblyReference.cache
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.ResolveComReference.cache
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.Form1.resources
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.Properties.Resources.resources
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.GenerateResource.cache
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.csproj.CoreCompileInputs.cache
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.exe
+W:\Users\oscar\Source\Repos\oscarsun72\PPTtoDoc_PowerPoint_XCHG_Word\Doc_PPt\Doc_PPt\obj\Debug\Doc_PPt.pdb
