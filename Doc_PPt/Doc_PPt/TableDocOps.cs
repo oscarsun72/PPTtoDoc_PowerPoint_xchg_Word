@@ -1,4 +1,8 @@
-﻿using Microsoft.Office.Core;
+﻿using CharacterConverttoCharacterPics;
+using insertGuaXingtoPowerpnt;
+using Microsoft.Office.Core;
+using System.Collections.Generic;
+using System.IO;
 using System.Media;
 using winWord = Microsoft.Office.Interop.Word;
 namespace Doc_PPt
@@ -35,14 +39,14 @@ namespace Doc_PPt
                 {
                     DocOps doc = new DocOps();
                     d = doc.openDoc(DocOps.getDocFullname());
-                    if (d==null)return;
+                    if (d == null) return;
                 }
             }
             else
             {
                 DocOps doc = new DocOps();
                 d = doc.openDoc(DocOps.getDocFullname());
-                if (d == null)return;
+                if (d == null) return;
             }
             //放在指定位置以開始
             d.Tables[1].Cell(3, 1).Range.Characters[1].Select();
@@ -51,9 +55,11 @@ namespace Doc_PPt
             int r, s; winWord.Cell cel; winWord.Range rng;
             winWord.InlineShape inlsp; winWord.Table tb;
             //List<WinWord.InlineShape> inlsps = new List<WinWord.InlineShape>();
-            winWord.Row rw; winWord.Range rngInlSp; 
-            const float picCellWidth= 122.7F, picCellHeight= 120.2F;
-             r = 1;
+            winWord.Row rw; winWord.Range rngInlSp;
+            const float picCellWidth = 122.7F, picCellHeight = 120.2F;
+            r = 1;
+            string wTitle = d.Tables[r].Cell(2, 1).Range.Characters[1].Text; //記下標頭字           
+            winWord.Range wTitleRng = Selection.Range;
             rng = Selection.Range;
             wdApp.ScreenUpdating = false;
             d.Tables[1].Rows.Add(); d.Tables[1].Rows.Add();//最後會留下一個表格再予刪除
@@ -73,6 +79,14 @@ namespace Doc_PPt
                 Selection.Collapse(winWord.WdCollapseDirection.
                     wdCollapseStart);
                 Selection.Paste();//貼上標題列
+                wTitle = d.Tables[r].Cell(2, 1).Range.Characters[1].Text;
+                if(d.Tables[r].Range.Characters[1].Previous()==null) d.Tables[r].Range.Characters[1].InsertBefore("\r");
+                wTitleRng = d.Tables[r].Range.Characters[1].Previous();
+                wTitleRng.InsertParagraphBefore();
+                wTitleRng =wTitleRng.Paragraphs[1].Range;                
+                wTitleRng.Text = wTitle;//設定每個字頭的標題完成
+                //wTitleRng.set_Style("標題 2");//此二式均可
+                wTitleRng.set_Style(d.Styles["標題 2"]);
                 Selection.Document.Tables[Selection.Document.Tables.Count]
                     .Range.Characters[1].Select();
                 Selection.Collapse(winWord.WdCollapseDirection.
@@ -95,7 +109,17 @@ namespace Doc_PPt
                 tb.Borders.OutsideLineStyle =//外框樣式 
                     winWord.WdLineStyle.wdLineStyleSingle;//winWord.WdLineStyle.wdLineStyleDouble;
                 tb.Rows[1].Height = picCellHeight;//圖片儲存格的高
-                tb.Rows[2].Height = 56;                
+                tb.Rows[2].Height = 56;//靜態筆順圖所放的儲存格,準備插入靜態筆順圖形
+                if (DirFiles.PicsStaticStrokeOrderFolder != "")
+                {
+                    FindFileThruLINQ fftL = new FindFileThruLINQ(DirFiles.PicsStaticStrokeOrderFolder);
+                    IEnumerable<FileInfo> ieFi = fftL.findFiles(wTitle);
+                    foreach (FileInfo item in ieFi)
+                    {
+                        PicsOps.InlineShapesAddPic(tb.Cell(2, 1)
+                            .Range.Characters[1], item.FullName);
+                    }
+                }
                 //表格置中
                 //此無效：tb.Range.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
                 //這才有效：//http://www.wordbanter.com/showthread.php?t=110960
@@ -118,8 +142,8 @@ namespace Doc_PPt
 
                 s = Selection.Start;
                 rng.SetRange(s, s);//記下圖片要貼上的位置
-                picsCount =cel.Range.InlineShapes.Count;
-                if (picsCount>0)
+                picsCount = cel.Range.InlineShapes.Count;
+                if (picsCount > 0)
                 {
                     inlsp = cel.Range.InlineShapes[1];
                     inlsp.Select();
@@ -183,22 +207,22 @@ namespace Doc_PPt
                         rngInlSp = Selection.Previous();
                     else //(Selection.Next().InlineShapes.Count > 0)
                         rngInlSp = Selection.Next();
-                        rngInlSp.InlineShapes[1].LockAspectRatio = MsoTriState.msoTrue;
-                        rngInlSp.InlineShapes[1].Height = picCellHeight;
-                        if (rngInlSp.InlineShapes[1].Width>picCellWidth)
-                        {
-                            rngInlSp.InlineShapes[1].Width = picCellWidth;
-                        }
+                    rngInlSp.InlineShapes[1].LockAspectRatio = MsoTriState.msoTrue;
+                    rngInlSp.InlineShapes[1].Height = picCellHeight;
+                    if (rngInlSp.InlineShapes[1].Width > picCellWidth)
+                    {
+                        rngInlSp.InlineShapes[1].Width = picCellWidth;
+                    }
                     //以上圖片貼到定位且處理好其大小了
                     //離開圖片
-                    Selection.MoveDown(Count:2);
+                    Selection.MoveDown(Count: 2);
                     //Selection.Collapse(WinWord.WdCollapseDirection.wdCollapseEnd);
                     //與下一分割出來的表格空2行（段）--即與下一個漢字字源表分開來（距離拉開）
                     Selection.InsertParagraphAfter(); Selection.InsertParagraphAfter();
                 }
                 //以上有圖時的處理，以下缺圖者亦同然：
                 Selection.Document.Tables[r].Columns[8].Cells.Delete();//原來放置圖片的那欄刪除
-                r+=2; //前面Tables.Add多插一表格，計數要再加1
+                r += 2; //前面Tables.Add多插一表格，計數要再加1
                 if (r > d.Tables.Count) break;
                 if (Selection.Document.Tables[r].Rows.Count > 3)//結束時，尚須修改。目前可以權且加幾空白列在最後一列後
                     Selection.Document.Tables[r].Rows[3].Select();
