@@ -204,6 +204,9 @@ namespace CharacterConverttoCharacterPics
                 ppt.Close();//還是會自己關掉，要比較久而已 感恩感恩　南無阿彌陀佛 20210419
                 //ppt = null;//close()了就不用此行設為null了
             }
+            //打包匯出的字圖，準備上傳雲端備份
+            DirFiles.zipFolderFiles(exportDir);
+            //移動完成的檔案到「done已完成」子資料夾
             List<FileInfo> fList_done已完成 = new List<FileInfo>();
             foreach (powerPnt.Presentation item in ppts)
             {
