@@ -52,7 +52,7 @@ namespace CharacterConverttoCharacterPics
                 FontNameWanted;
             ppt.Slides[2].Select();
             ppt.Slides[2].Shapes[1].TextFrame.TextRange.Select();
-            ppt.Application.WindowState=powerPnt.PpWindowState.ppWindowMaximized;
+            ppt.Application.WindowState = powerPnt.PpWindowState.ppWindowMaximized;
             ppt.Application.Activate();
             Clipboard.SetText(listBox1.SelectedItem.ToString());
             List<string> ls = new List<string>();
@@ -79,6 +79,30 @@ namespace CharacterConverttoCharacterPics
                 default:
                     break;
             }
+            switch (ModifierKeys)
+            {
+                case Keys.Shift:
+                    break;
+                case Keys.Control:
+                    if (listBox1.SelectedItems.Count > 0)
+                        if (e.KeyCode == Keys.C)
+                        {
+                            Clipboard.SetText(
+                                listBox1.SelectedItem.ToString());
+                            doNotEntered = true;
+                        }
+                    break;
+                case Keys.Alt:
+                    break;
+                default:
+                    break;
+            }
+        }
+        bool doNotEntered = false;
+        private void listBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (doNotEntered)//不讓按鍵干擾操作
+            { e.Handled = true; doNotEntered = false; }
         }
     }
 }
