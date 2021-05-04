@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\CharacterConverttoCharacterPics"
+    "\\CharacterConverttoCharacterPics",
+    "\\CharacterConverttoCharacterPics\\CharacterConverttoCharacterPics"
   ],
-  "SelectedNode": "\\CharacterConverttoCharacterPics\\CharacterConverttoCharacterPics.sln",
+  "SelectedNode": "\\CharacterConverttoCharacterPics\\CharacterConverttoCharacterPics\\Form1.cs",
   "PreviewInSolutionExplorer": false
 }
