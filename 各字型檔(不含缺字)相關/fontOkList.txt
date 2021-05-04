@@ -72,6 +72,8 @@ Adobe 楷体 Std R
 KaiTi
 DFKaiW5-A
 文鼎標準楷體ProM
+文鼎楷體L
+文鼎楷體HKB
 文鼎楷體B5E外字M
 
 //法書體
