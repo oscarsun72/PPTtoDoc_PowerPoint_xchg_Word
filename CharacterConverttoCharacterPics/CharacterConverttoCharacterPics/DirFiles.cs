@@ -95,7 +95,7 @@ namespace CharacterConverttoCharacterPics
                 //{
                 //    AppPpt = null
                 //};
-                
+
                 return new App(app.PowerPoint)
                     .AppPpt.Presentations.Open(
                     getDirRoot + "字圖母片.pptm");
@@ -143,8 +143,9 @@ namespace CharacterConverttoCharacterPics
         {
             if (Directory.Exists(dir) == false) return;
             DirectoryInfo di = new DirectoryInfo(dir);
-            ZipFile.CreateFromDirectory(dir,
-                di.Parent.FullName + "\\" + di.Name + ".zip",
+            string fZip = di.Parent.FullName + "\\" + di.Name + ".zip";
+            if (File.Exists(fZip)) File.Delete(fZip);
+            ZipFile.CreateFromDirectory(dir, fZip,
                 CompressionLevel.NoCompression, true
                 );
         }
