@@ -161,8 +161,9 @@ namespace CharacterConverttoCharacterPics
             d.Paragraphs[++paraIndex].Range.Text = "e.InnerException:";
             d.Paragraphs[paraIndex].set_Style("標題 5");
             d.Range().InsertParagraphAfter();//p12
-            Exception ee = e.InnerException;
-            d.Paragraphs[++paraIndex].Range.Text =ee.ToString();
+            Exception ee = e.InnerException??null;
+            if(ee!=null)d.Paragraphs[++paraIndex].Range.Text =ee.ToString();
+            else d.Paragraphs[++paraIndex].Range.Text ="null";
 
             d.Range().InsertParagraphAfter();//p13
             d.Paragraphs[++paraIndex].Range.Text = "e.HResult:";
