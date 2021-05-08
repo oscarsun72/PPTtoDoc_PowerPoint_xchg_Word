@@ -120,6 +120,7 @@ namespace CharacterConverttoCharacterPics
             catch (Exception e)
             {
                 printExceptiontoDoc(e);
+                this.Enabled = true; button1.Enabled = true;
             }
         }
 
@@ -142,6 +143,7 @@ namespace CharacterConverttoCharacterPics
             d.Paragraphs[++paraIndex].Range.Text = "e.Data:";
             d.Paragraphs[paraIndex].set_Style("標題 5");
             d.Range().InsertParagraphAfter();//p6
+            d.Paragraphs[++paraIndex].set_Style("內文");
             d.Paragraphs[++paraIndex].Range.Text = e.Data.ToString();
 
             d.Range().InsertParagraphAfter();//p7
@@ -181,6 +183,7 @@ namespace CharacterConverttoCharacterPics
             d.Paragraphs[++paraIndex].Range.Text = "e.TargetSite:";
             d.Paragraphs[paraIndex].set_Style("標題 5");
             d.Range().InsertParagraphAfter();//p18
+            d.Paragraphs[++paraIndex].set_Style("內文");
             d.Paragraphs[++paraIndex].Range.Text = e.TargetSite.ToString();
             /*
               d.Range().Text = e.Message + "\n\r\n\r" +
@@ -193,6 +196,7 @@ namespace CharacterConverttoCharacterPics
               */
             d.ActiveWindow.Visible = true;
             d.Application.Activate();
+            
         }
 
         private void textBox2_Click(object sender, EventArgs e)
